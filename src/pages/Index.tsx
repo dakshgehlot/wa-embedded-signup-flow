@@ -93,6 +93,11 @@ const Index = () => {
         response_type: 'code',
         override_default_response_type: true,
         extras: {
+        //   features: [
+        //     {
+        //       name: "marketing_messages_lite",
+        //     }
+        //   ],
           setup: {},
           featureType: featureTypeOverride,
           sessionInfoVersion: '3',
@@ -112,8 +117,9 @@ const Index = () => {
     setModalStep(2);
   };
   const handleContinueWithoutNumber = () => {
-    setFromNoNumber(true);
-    setModalStep(2);
+    setShowModal(false);
+    setModalStep(null);
+    setTimeout(() => launchWhatsAppSignup("only_waba_sharing"), 0);
   };
 
   // Second modal options
