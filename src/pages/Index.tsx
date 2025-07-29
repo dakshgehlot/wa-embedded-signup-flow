@@ -28,8 +28,13 @@ const Index = () => {
   const [previousStep, setPreviousStep] = useState<2 | 3 | 4 | null>(null);
   const [debugMode, setDebugMode] = useState(false);
   const [debugResponse, setDebugResponse] = useState<'success' | 'cancel' | null>(null);
-  const [testMessage, setTestMessage] = useState({ recipient: '', body: '' });
+  const [testMessage, setTestMessage] = useState({ 
+    recipient: '', 
+    body: 'Welcome to Netcore Cloud! This is a test message to verify your WhatsApp sender registration. Thank you for choosing Netcore Cloud for your messaging needs.' 
+  });
   const [sendingTest, setSendingTest] = useState(false);
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
 
   // Helper to add log with timestamp
   const addLog = (msg: string) => {
@@ -208,7 +213,9 @@ const Index = () => {
   // Send test message handler
   const handleSendTestMessage = () => {
     if (!testMessage.recipient || !testMessage.body) {
-      alert('Please fill in both recipient number and message body');
+      setSnackbarMessage('Please fill in both recipient number and message body');
+      setShowSnackbar(true);
+      setTimeout(() => setShowSnackbar(false), 3000);
       return;
     }
     
@@ -217,8 +224,13 @@ const Index = () => {
     // Simulate sending test message (replace with actual API call)
     setTimeout(() => {
       setSendingTest(false);
-      alert('Test message sent successfully!');
-      setTestMessage({ recipient: '', body: '' });
+      setSnackbarMessage('Test message sent successfully!');
+      setShowSnackbar(true);
+      setTimeout(() => setShowSnackbar(false), 3000);
+      setTestMessage({ 
+        recipient: '', 
+        body: 'Welcome to Netcore Cloud! This is a test message to verify your WhatsApp sender registration. Thank you for choosing Netcore Cloud for your messaging needs.' 
+      });
     }, 2000);
   };
 
@@ -386,8 +398,12 @@ const Index = () => {
     setPreviousStep(null);
     setDebugMode(false);
     setDebugResponse(null);
-    setTestMessage({ recipient: '', body: '' });
+    setTestMessage({ 
+      recipient: '', 
+      body: 'Welcome to Netcore Cloud! This is a test message to verify your WhatsApp sender registration. Thank you for choosing Netcore Cloud for your messaging needs.' 
+    });
     setSendingTest(false);
+    setShowSnackbar(false);
   };
 
   // Download logs as txt file
@@ -570,6 +586,16 @@ const Index = () => {
         @keyframes spin {
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
+        }
+        @keyframes fadeInUp {
+          0% { 
+            opacity: 0; 
+            transform: translateY(20px); 
+          }
+          100% { 
+            opacity: 1; 
+            transform: translateY(0); 
+          }
         }
       `}</style>
       <div 
@@ -783,13 +809,68 @@ const Index = () => {
                           animation: 'spin 1s linear infinite',
                           margin: '0 auto 20px'
                         }}></div>
-                        <p style={{color: '#666', fontSize: '16px'}}>
-                          {loadingStep === 0 && "Getting your business token..."}
-                          {loadingStep === 1 && "Subscribing to webhooks"}
-                          {loadingStep === 2 && "Extending credit line"}
-                          {loadingStep === 3 && "Registering the phone number"}
-                          {loadingStep === 4 && "Finalizing registration..."}
-                        </p>
+                        <div style={{color: '#666', fontSize: '16px', textAlign: 'center', maxWidth: '400px', margin: '0 auto'}}>
+                          {loadingStep >= 0 && (
+                            <div style={{
+                              display: 'flex', 
+                              alignItems: 'center', 
+                              justifyContent: 'center',
+                              marginBottom: '8px',
+                              animation: 'fadeInUp 0.5s ease-out'
+                            }}>
+                              <span style={{marginRight: '8px', color: '#2e7d32'}}>✓</span>
+                              Getting your business token...
+                            </div>
+                          )}
+                          {loadingStep >= 1 && (
+                            <div style={{
+                              display: 'flex', 
+                              alignItems: 'center', 
+                              justifyContent: 'center',
+                              marginBottom: '8px',
+                              animation: 'fadeInUp 0.5s ease-out'
+                            }}>
+                              <span style={{marginRight: '8px', color: '#2e7d32'}}>✓</span>
+                              Subscribing to webhooks
+                            </div>
+                          )}
+                          {loadingStep >= 2 && (
+                            <div style={{
+                              display: 'flex', 
+                              alignItems: 'center', 
+                              justifyContent: 'center',
+                              marginBottom: '8px',
+                              animation: 'fadeInUp 0.5s ease-out'
+                            }}>
+                              <span style={{marginRight: '8px', color: '#2e7d32'}}>✓</span>
+                              Extending credit line
+                            </div>
+                          )}
+                          {loadingStep >= 3 && (
+                            <div style={{
+                              display: 'flex', 
+                              alignItems: 'center', 
+                              justifyContent: 'center',
+                              marginBottom: '8px',
+                              animation: 'fadeInUp 0.5s ease-out'
+                            }}>
+                              <span style={{marginRight: '8px', color: '#2e7d32'}}>✓</span>
+                              Registering the phone number
+                            </div>
+                          )}
+                          {loadingStep >= 4 && (
+                            <div style={{
+                              display: 'flex', 
+                              alignItems: 'center', 
+                              justifyContent: 'center',
+                              marginBottom: '8px',
+                              animation: 'fadeInUp 0.5s ease-out'
+                            }}>
+                              <span style={{marginRight: '8px', color: '#2e7d32'}}>✓</span>
+                              Finalizing registration...
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </>
                   )}
@@ -888,7 +969,7 @@ const Index = () => {
                         </label>
                         <input
                           type="text"
-                          placeholder="+1234567890"
+                          placeholder="911234567890"
                           value={testMessage.recipient}
                           onChange={(e) => setTestMessage(prev => ({...prev, recipient: e.target.value}))}
                           style={{
@@ -909,6 +990,7 @@ const Index = () => {
                           placeholder="Enter your test message here..."
                           value={testMessage.body}
                           onChange={(e) => setTestMessage(prev => ({...prev, body: e.target.value}))}
+                          readOnly
                           style={{
                             width: '100%',
                             padding: '12px',
@@ -917,12 +999,18 @@ const Index = () => {
                             fontSize: '16px',
                             fontFamily: 'Helvetica, Arial, sans-serif',
                             minHeight: '100px',
-                            resize: 'vertical'
+                            resize: 'none',
+                            backgroundColor: '#f5f5f5',
+                            color: '#666',
+                            cursor: 'not-allowed'
                           }}
                         />
                       </div>
                       <div className="modal-actions">
-                        <button className="modal-link-btn" onClick={() => { setShowModal(false); setModalStep(null); setTestMessage({ recipient: '', body: '' }); }}>CLOSE</button>
+                        <button className="modal-link-btn" onClick={() => { setShowModal(false); setModalStep(null); setTestMessage({ 
+                          recipient: '', 
+                          body: 'Welcome to Netcore Cloud! This is a test message to verify your WhatsApp sender registration. Thank you for choosing Netcore Cloud for your messaging needs.' 
+                        }); }}>CLOSE</button>
                         <button 
                           onClick={handleSendTestMessage}
                           disabled={sendingTest || !testMessage.recipient || !testMessage.body}
@@ -951,6 +1039,30 @@ const Index = () => {
           </div>
         </div>
       </div>
+      {/* Snackbar */}
+      {showSnackbar && (
+        <div style={{
+          position: 'fixed',
+          bottom: '20px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          backgroundColor: '#2e7d32',
+          color: 'white',
+          padding: '12px 24px',
+          borderRadius: '4px',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+          zIndex: 10000,
+          fontFamily: 'Helvetica, Arial, sans-serif',
+          fontSize: '14px',
+          fontWeight: '500',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px'
+        }}>
+          <span style={{fontSize: '16px'}}>✓</span>
+          {snackbarMessage}
+        </div>
+      )}
     </>
   );
 };
