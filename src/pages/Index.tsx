@@ -17,9 +17,19 @@ const Index = () => {
   const [, setLogsUpdated] = useState(0);
   // Remove featureType state, use direct value passing
   const [showModal, setShowModal] = useState(false);
-  const [modalStep, setModalStep] = useState<1 | 2 | 3 | null>(null);
+  const [modalStep, setModalStep] = useState<2 | 3 | 4 | 5 | 6 | 7 | 8 | null>(null);
   const [fromNoNumber, setFromNoNumber] = useState(false);
-  const [migrationChecks, setMigrationChecks] = useState({ doc: false, twofa: false, mmlite: false });
+  const [migrationChecks, setMigrationChecks] = useState({ doc: false, twofa: false });
+  const [connectChecks, setConnectChecks] = useState({ confirm: false });
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [loadingStep, setLoadingStep] = useState(0);
+  const [buttonLoading, setButtonLoading] = useState(false);
+  const [previousStep, setPreviousStep] = useState<2 | 3 | 4 | null>(null);
+  const [debugMode, setDebugMode] = useState(false);
+  const [debugResponse, setDebugResponse] = useState<'success' | 'cancel' | null>(null);
+  const [testMessage, setTestMessage] = useState({ recipient: '', body: '' });
+  const [sendingTest, setSendingTest] = useState(false);
 
   // Helper to add log with timestamp
   const addLog = (msg: string) => {
@@ -55,7 +65,47 @@ const Index = () => {
         if (data.type === 'WA_EMBEDDED_SIGNUP') {
           console.log('message event: ', data); // remove after testing
           addLog('message event: ' + JSON.stringify(data));
-          // your code goes here
+          
+          // Check if the event is FINISH
+          if (data.event === 'FINISH') {
+            // Reset button loading state
+            setButtonLoading(false);
+            // Show loading state
+            setShowModal(true);
+            setModalStep(5);
+            setLoadingStep(0);
+            
+            // Show status messages for 2 seconds each
+            setTimeout(() => {
+              setLoadingStep(1);
+            }, 4000);
+            
+            setTimeout(() => {
+              setLoadingStep(2);
+            }, 8000);
+            
+            setTimeout(() => {
+              setLoadingStep(3);
+            }, 12000);
+            
+            setTimeout(() => {
+              setLoadingStep(4);
+            }, 16000);
+            
+            // After 5 more seconds (total 13 seconds), show success message
+            setTimeout(() => {
+              setModalStep(6);
+            }, 20000);
+          }
+          
+          // Check if the event is CANCEL or status is unknown
+          if (data.event === 'CANCEL' || data.status === 'unknown') {
+            // Reset button loading state
+            setButtonLoading(false);
+            // Show error state
+            setShowModal(true);
+            setModalStep(7);
+          }
         }
       } catch {
         console.log('message event: ', event.data); // remove after testing
@@ -79,6 +129,7 @@ const Index = () => {
       addLog('response: ' + code);
       // your code goes here
     } else {
+      console.log()
       console.log('response: ', response); // remove after testing
       addLog('response: ' + JSON.stringify(response));
       // your code goes here
@@ -108,50 +159,235 @@ const Index = () => {
     }
   };
 
-  // Handler for modal options
-  const handleBuyNewNumber = () => {
-    setShowModal(false); // Do nothing, just close
-  };
-  const handleConnectExisting = () => {
-    setFromNoNumber(false);
-    setModalStep(2);
-  };
-  const handleContinueWithoutNumber = () => {
-    setShowModal(false);
-    setModalStep(null);
-    setTimeout(() => launchWhatsAppSignup("only_waba_sharing"), 0);
-  };
+
 
   // Second modal options
   const handleConnectOutsideInfobip = () => {
-    setShowModal(false);
-    setModalStep(null);
-    setTimeout(() => launchWhatsAppSignup(fromNoNumber ? "only_waba_sharing" : ""), 0);
+    setModalStep(4);
+    setConnectChecks({ confirm: false });
   };
   const handleMigrateNumber = () => {
     setModalStep(3);
-    setMigrationChecks({ doc: false, twofa: false, mmlite: false });
+    setMigrationChecks({ doc: false, twofa: false });
+  };
+
+
+
+  // Connect modal actions
+  const handleConnectLogin = () => {
+    setButtonLoading(true);
+    setPreviousStep(4);
+    
+    if (debugMode && debugResponse) {
+      // Simulate response after a short delay
+      setTimeout(() => simulateESResponse(), 1000);
+    } else {
+      setTimeout(() => launchWhatsAppSignup(""), 0);
+    }
   };
 
   // Migration modal actions
   const handleMigrationLogin = () => {
-    let ft = "";
-    if (migrationChecks.mmlite) {
-      ft = "marketing_messages_lite";
-    } else if (fromNoNumber) {
-      ft = "only_waba_sharing";
+    setButtonLoading(true);
+    setPreviousStep(3);
+    
+    if (debugMode && debugResponse) {
+      // Simulate response after a short delay
+      setTimeout(() => simulateESResponse(), 1000);
+    } else {
+      setTimeout(() => launchWhatsAppSignup(""), 0);
     }
-    setShowModal(false);
-    setModalStep(null);
-    setTimeout(() => launchWhatsAppSignup(ft), 0);
+  };
+
+  // Try again handler
+  const handleTryAgain = () => {
+    setButtonLoading(false);
+    setModalStep(previousStep);
+  };
+
+  // Send test message handler
+  const handleSendTestMessage = () => {
+    if (!testMessage.recipient || !testMessage.body) {
+      alert('Please fill in both recipient number and message body');
+      return;
+    }
+    
+    setSendingTest(true);
+    
+    // Simulate sending test message (replace with actual API call)
+    setTimeout(() => {
+      setSendingTest(false);
+      alert('Test message sent successfully!');
+      setTestMessage({ recipient: '', body: '' });
+    }, 2000);
+  };
+
+  // Debug mode response simulator
+  const simulateESResponse = () => {
+    if (debugResponse === 'success') {
+      const successResponse = {
+        data: {
+          phone_number_id: 'PHONE_NUMBER_ID_' + Math.random().toString(36).substr(2, 9),
+          waba_id: 'WABA_ID_' + Math.random().toString(36).substr(2, 9),
+          business_id: 'BUSINESS_ID_' + Math.random().toString(36).substr(2, 9)
+        },
+        type: 'WA_EMBEDDED_SIGNUP',
+        event: 'FINISH'
+      };
+      
+      // Simulate the message event
+      const event = {
+        origin: 'https://www.facebook.com',
+        data: JSON.stringify(successResponse)
+      };
+      
+      // Trigger the message listener
+      const messageListener = (event) => {
+        if (!event.origin.endsWith('facebook.com')) return;
+        try {
+          const data = JSON.parse(event.data);
+          if (data.type === 'WA_EMBEDDED_SIGNUP') {
+            console.log('message event: ', data);
+            addLog('message event: ' + JSON.stringify(data));
+            
+            // Check if the event is FINISH
+            if (data.event === 'FINISH') {
+              // Reset button loading state
+              setButtonLoading(false);
+              // Show loading state
+              setShowModal(true);
+              setModalStep(5);
+              setLoadingStep(0);
+              
+              // Show status messages for 2 seconds each
+              setTimeout(() => {
+                setLoadingStep(1);
+              }, 4000);
+              
+              setTimeout(() => {
+                setLoadingStep(2);
+              }, 8000);
+              
+              setTimeout(() => {
+                setLoadingStep(3);
+              }, 12000);
+              
+              setTimeout(() => {
+                setLoadingStep(4);
+              }, 16000);
+              
+              // After 5 more seconds (total 13 seconds), show success message
+              setTimeout(() => {
+                setModalStep(6);
+              }, 20000);
+            }
+            
+            // Check if the event is CANCEL or status is unknown
+            if (data.event === 'CANCEL' || data.status === 'unknown') {
+              // Reset button loading state
+              setButtonLoading(false);
+              // Show error state
+              setShowModal(true);
+              setModalStep(7);
+            }
+          }
+        } catch {
+          console.log('message event: ', event.data);
+          addLog('message event: ' + event.data);
+        }
+      };
+      
+      messageListener(event);
+    } else if (debugResponse === 'cancel') {
+      const cancelResponse = {
+        data: {
+          current_step: "BUSINESS_ACCOUNT_SELECTION"
+        },
+        type: "WA_EMBEDDED_SIGNUP",
+        event: "CANCEL",
+        version: "3"
+      };
+      
+      // Simulate the message event
+      const event = {
+        origin: 'https://www.facebook.com',
+        data: JSON.stringify(cancelResponse)
+      };
+      
+      // Trigger the message listener
+      const messageListener = (event) => {
+        if (!event.origin.endsWith('facebook.com')) return;
+        try {
+          const data = JSON.parse(event.data);
+          if (data.type === 'WA_EMBEDDED_SIGNUP') {
+            console.log('message event: ', data);
+            addLog('message event: ' + JSON.stringify(data));
+            
+            // Check if the event is FINISH
+            if (data.event === 'FINISH') {
+              // Reset button loading state
+              setButtonLoading(false);
+              // Show loading state
+              setShowModal(true);
+              setModalStep(5);
+              setLoadingStep(0);
+              
+              // Show status messages for 2 seconds each
+              setTimeout(() => {
+                setLoadingStep(1);
+              }, 4000);
+              
+              setTimeout(() => {
+                setLoadingStep(2);
+              }, 8000);
+              
+              setTimeout(() => {
+                setLoadingStep(3);
+              }, 12000);
+              
+              setTimeout(() => {
+                setLoadingStep(4);
+              }, 16000);
+              
+              // After 5 more seconds (total 13 seconds), show success message
+              setTimeout(() => {
+                setModalStep(6);
+              }, 20000);
+            }
+            
+            // Check if the event is CANCEL or status is unknown
+            if (data.event === 'CANCEL' || data.status === 'unknown') {
+              // Reset button loading state
+              setButtonLoading(false);
+              // Show error state
+              setShowModal(true);
+              setModalStep(7);
+            }
+          }
+        } catch {
+          console.log('message event: ', event.data);
+          addLog('message event: ' + event.data);
+        }
+      };
+      
+      messageListener(event);
+    }
   };
 
   // Open modal
   const openRegisterModal = () => {
     setShowModal(true);
-    setModalStep(1);
+    setModalStep(2);
     setFromNoNumber(false);
-    setMigrationChecks({ doc: false, twofa: false, mmlite: false });
+    setMigrationChecks({ doc: false, twofa: false });
+    setConnectChecks({ confirm: false });
+    setLoadingStep(0);
+    setButtonLoading(false);
+    setPreviousStep(null);
+    setDebugMode(false);
+    setDebugResponse(null);
+    setTestMessage({ recipient: '', body: '' });
+    setSendingTest(false);
   };
 
   // Download logs as txt file
@@ -304,24 +540,36 @@ const Index = () => {
           padding-top: 18px;
         }
         .migration-login-btn {
-          background: #ff6d00;
-          color: #fff;
-          border: none;
+          background-color: #1877f2;
+          border: 0;
           border-radius: 4px;
-          font-weight: 600;
-          font-size: 16px;
-          padding: 10px 24px;
+          color: #fff;
           cursor: pointer;
-          opacity: 1;
+          font-family: Helvetica, Arial, sans-serif;
+          font-size: 16px;
+          font-weight: bold;
+          height: 40px;
+          padding: 0 24px;
           display: flex;
           align-items: center;
           gap: 8px;
+          min-width: 200px;
+          justify-content: center;
         }
         .migration-login-btn:disabled {
-          background: #ffe0cc;
+          background: #e4e6eb;
           color: #bdbdbd;
           cursor: not-allowed;
           opacity: 1;
+        }
+        .migration-login-btn.loading {
+          background: #e4e6eb;
+          color: #bdbdbd;
+          cursor: not-allowed;
+        }
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
         }
       `}</style>
       <div 
@@ -349,47 +597,12 @@ const Index = () => {
                 <div className="custom-modal-animate" style={{background: '#fff', borderRadius: 8, padding: 32, minWidth: 400, maxWidth: 480, boxShadow: '0 2px 16px rgba(255,109,0,0.15)', textAlign: 'left', position: 'relative', border: '1.5px solid #ff6d00'}}>
                   {/* Close button */}
                   <button onClick={() => { setShowModal(false); setModalStep(null); }} style={{position: 'absolute', top: 18, right: 18, background: 'none', border: 'none', fontSize: 22, color: '#ff6d00', cursor: 'pointer'}} aria-label="Close">×</button>
-                  {/* Step 1: Main options */}
-                  {modalStep === 1 && (
-                    <>
-                      <div className="modal-title">Register a WhatsApp sender</div>
-                      <div className="modal-desc">To connect WhatsApp with <b>Netcore Cloud</b>, you'll need a phone number. Choose one of the options below to get started.</div>
-                      <div className="option-card" onClick={handleBuyNewNumber}>
-                        <span className="option-icon" style={{color: '#ff6d00'}}>
-                          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M6.5 10.5V7.75A3.75 3.75 0 0 1 10.25 4h3.5A3.75 3.75 0 0 1 17.5 7.75v2.75" stroke="#ff6d00" strokeWidth="1.5" strokeLinecap="round"/><circle cx="12" cy="17" r="5" stroke="#ff6d00" strokeWidth="1.5"/><path d="M12 15v4m2-2h-4" stroke="#ff6d00" strokeWidth="1.5" strokeLinecap="round"/></svg>
-                        </span>
-                        <div className="option-content">
-                          <div className="option-title">Buy a new number <span style={{fontWeight: 400}}>(Recommended)</span></div>
-                          <div className="option-desc">Quick and easy to set up. No verification through SMS or phone call required.</div>
-                        </div>
-                      </div>
-                      <div className="option-card" onClick={handleConnectExisting}>
-                        <span className="option-icon" style={{color: '#ff6d00'}}>
-                          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M6.5 10.5V7.75A3.75 3.75 0 0 1 10.25 4h3.5A3.75 3.75 0 0 1 17.5 7.75v2.75" stroke="#ff6d00" strokeWidth="1.5" strokeLinecap="round"/><circle cx="12" cy="17" r="5" stroke="#ff6d00" strokeWidth="1.5"/><path d="M12 17h0" stroke="#ff6d00" strokeWidth="2" strokeLinecap="round"/><path d="M9.5 17h5" stroke="#ff6d00" strokeWidth="1.5" strokeLinecap="round"/></svg>
-                        </span>
-                        <div className="option-content">
-                          <div className="option-title">Connect a number you already have</div>
-                          <div className="option-desc">Use a number you bought from <b>Netcore Cloud</b> or your own number. You might need to verify the number by receiving a code through SMS or a phone call.</div>
-                        </div>
-                      </div>
-                      <div className="option-card" onClick={handleContinueWithoutNumber}>
-                        <span className="option-icon" style={{color: '#ff6d00'}}>
-                          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="17" r="5" stroke="#ff6d00" strokeWidth="1.5"/><path d="M12 17h0" stroke="#ff6d00" strokeWidth="2" strokeLinecap="round"/><path d="M6.5 10.5V7.75A3.75 3.75 0 0 1 10.25 4h3.5A3.75 3.75 0 0 1 17.5 7.75v2.75" stroke="#ff6d00" strokeWidth="1.5" strokeLinecap="round"/></svg>
-                        </span>
-                        <div className="option-content">
-                          <div className="option-title">Continue without a phone number</div>
-                          <div className="option-desc">The phone number will have to be configured later.</div>
-                        </div>
-                      </div>
-                      <div className="modal-actions">
-                        <button className="modal-link-btn" onClick={() => { setShowModal(false); setModalStep(null); }}>CANCEL</button>
-                      </div>
-                    </>
-                  )}
+
                   {/* Step 2: Connect number options */}
                   {modalStep === 2 && (
                     <>
-                      <div className="modal-title">Connect a number you already have</div>
+                      <div className="modal-title">Register a WhatsApp sender</div>
+                      <div className="modal-desc">To connect WhatsApp with <b>Netcore Cloud</b>, you'll need a phone number. Choose one of the options below to get started.</div>
                       <div className="option-card" onClick={handleConnectOutsideInfobip}>
                         <span className="option-icon" style={{color: '#ff6d00'}}>
                           <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="3" stroke="#ff6d00" strokeWidth="1.5"/><path d="M8 12h8" stroke="#ff6d00" strokeWidth="1.5" strokeLinecap="round"/><path d="M12 8v8" stroke="#ff6d00" strokeWidth="1.5" strokeLinecap="round"/></svg>
@@ -397,15 +610,6 @@ const Index = () => {
                         <div className="option-content">
                           <div className="option-title">Connect a number you have outside of Netcore Cloud</div>
                           <div className="option-desc">You will need to delete any existing WhatsApp accounts connected to the number. Verification with SMS or phone call required.</div>
-                        </div>
-                      </div>
-                      <div className="option-card disabled">
-                        <span className="option-icon" style={{color: '#ff6d00', opacity: 0.5}}>
-                          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="#ff6d00" strokeWidth="1.5"/><circle cx="12" cy="12" r="3" stroke="#ff6d00" strokeWidth="1.5"/></svg>
-                        </span>
-                        <div className="option-content">
-                          <div className="option-title" style={{color: '#888'}}>Connect a Netcore Cloud number</div>
-                          <div className="option-desc">Register a number you already bought from Netcore Cloud.</div>
                         </div>
                       </div>
                       <div className="option-card" onClick={handleMigrateNumber}>
@@ -419,7 +623,6 @@ const Index = () => {
                       </div>
                       <div className="modal-actions">
                         <button className="modal-link-btn" onClick={() => { setShowModal(false); setModalStep(null); }}>CANCEL</button>
-                        <button className="modal-link-btn" onClick={() => setModalStep(1)}>BACK</button>
                       </div>
                     </>
                   )}
@@ -463,19 +666,285 @@ const Index = () => {
                         <label htmlFor="2fa-check">I disabled 2FA on my old provider <a href="https://www.facebook.com/business/help/152651581095145" target="_blank" rel="noopener noreferrer" style={{color:'#ff6d00', textDecoration:'underline'}}>as required by Meta</a></label>
                       </div>
                       <div className="migration-checkbox">
-                        <input type="checkbox" id="mmlite-check" checked={migrationChecks.mmlite} onChange={e => setMigrationChecks(c => ({...c, mmlite: e.target.checked}))} />
-                        <label htmlFor="mmlite-check">I want to enable Marketing Messages Lite (MMLite) for this sender. <span style={{color:'#888', fontWeight:400}}>(optional)</span></label>
+                        <input type="checkbox" id="debug-check" checked={debugMode} onChange={e => setDebugMode(e.target.checked)} />
+                        <label htmlFor="debug-check">Debug Mode (Simulate ES Flow Response)</label>
                       </div>
+                      {debugMode && (
+                        <div style={{marginTop: 10, padding: 10, background: '#f5f5f5', borderRadius: 4}}>
+                          <div style={{marginBottom: 8, fontWeight: 'bold'}}>Select Response Type:</div>
+                          <div className="migration-checkbox">
+                            <input type="radio" id="success-radio" name="debugResponse" checked={debugResponse === 'success'} onChange={() => setDebugResponse('success')} />
+                            <label htmlFor="success-radio">Success Response (FINISH event)</label>
+                          </div>
+                          <div className="migration-checkbox">
+                            <input type="radio" id="cancel-radio" name="debugResponse" checked={debugResponse === 'cancel'} onChange={() => setDebugResponse('cancel')} />
+                            <label htmlFor="cancel-radio">Cancel Response (CANCEL event)</label>
+                          </div>
+                        </div>
+                      )}
                       <div className="migration-actions">
                         <button className="modal-link-btn" onClick={() => { setShowModal(false); setModalStep(null); }}>CANCEL</button>
                         <button className="modal-link-btn" onClick={() => setModalStep(2)}>BACK</button>
-                        <button className="migration-login-btn" disabled={!(migrationChecks.doc && migrationChecks.twofa)} onClick={handleMigrationLogin}>
-                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="4" fill="#fff"/><path d="M8 12h8M12 8v8" stroke="#1877f2" strokeWidth="1.5" strokeLinecap="round"/></svg>
-                          Login With Facebook
+                        <button className={`migration-login-btn ${buttonLoading ? 'loading' : ''}`} disabled={!(migrationChecks.doc && migrationChecks.twofa) || buttonLoading} onClick={handleMigrationLogin}>
+                          {buttonLoading ? (
+                            <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
+                              <div style={{
+                                width: '16px',
+                                height: '16px',
+                                border: '2px solid #bdbdbd',
+                                borderTop: '2px solid #fff',
+                                borderRadius: '50%',
+                                animation: 'spin 1s linear infinite'
+                              }}></div>
+                              <span>Loading...</span>
+                            </div>
+                          ) : (
+                            <>
+                              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="4" fill="#fff"/><text x="12" y="16" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#1877f2">f</text></svg>
+                              <span>Login With Facebook</span>
+                            </>
+                          )}
                         </button>
                       </div>
                     </>
                   )}
+                  {/* Step 4: Connect warning screen */}
+                  {modalStep === 4 && (
+                    <>
+                      <div className="modal-title">Login with Facebook to register a sender</div>
+                      <div className="modal-desc">
+                        If your number was not connected to a WhatsApp account, you are ready to log in with Facebook to start the registration process.
+                      </div>
+                      <div className="migration-warning">
+                        <span className="migration-warning-icon">⚠️</span>
+                        <div>
+                          <b>Before you continue</b><br/>
+                          If your number was connected to a personal WhatsApp account or WhatsApp Business App, make sure to delete your account before you continue. If you do not do this, your sender could be banned by Meta. <a href="https://www.facebook.com/business/help/152651581095145" target="_blank" rel="noopener noreferrer" style={{color:'#ff6d00', textDecoration:'underline'}}>Learn how to delete account</a>
+                        </div>
+                      </div>
+                      <div className="migration-checkbox">
+                        <input type="checkbox" id="confirm-check" checked={connectChecks.confirm} onChange={e => setConnectChecks(c => ({...c, confirm: e.target.checked}))} />
+                        <label htmlFor="confirm-check">I confirm the number I want to use is not connected to a WhatsApp account.</label>
+                      </div>
+                      <div className="migration-checkbox">
+                        <input type="checkbox" id="debug-check-connect" checked={debugMode} onChange={e => setDebugMode(e.target.checked)} />
+                        <label htmlFor="debug-check-connect">Debug Mode (Simulate ES Flow Response)</label>
+                      </div>
+                      {debugMode && (
+                        <div style={{marginTop: 10, padding: 10, background: '#f5f5f5', borderRadius: 4}}>
+                          <div style={{marginBottom: 8, fontWeight: 'bold'}}>Select Response Type:</div>
+                          <div className="migration-checkbox">
+                            <input type="radio" id="success-radio-connect" name="debugResponse-connect" checked={debugResponse === 'success'} onChange={() => setDebugResponse('success')} />
+                            <label htmlFor="success-radio-connect">Success Response (FINISH event)</label>
+                          </div>
+                          <div className="migration-checkbox">
+                            <input type="radio" id="cancel-radio-connect" name="debugResponse-connect" checked={debugResponse === 'cancel'} onChange={() => setDebugResponse('cancel')} />
+                            <label htmlFor="cancel-radio-connect">Cancel Response (CANCEL event)</label>
+                          </div>
+                        </div>
+                      )}
+                      <div className="migration-actions">
+                        <button className="modal-link-btn" onClick={() => { setShowModal(false); setModalStep(null); }}>CANCEL</button>
+                        <button className="modal-link-btn" onClick={() => setModalStep(2)}>BACK</button>
+                        <button className={`migration-login-btn ${buttonLoading ? 'loading' : ''}`} disabled={!connectChecks.confirm || buttonLoading} onClick={handleConnectLogin}>
+                          {buttonLoading ? (
+                            <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
+                              <div style={{
+                                width: '16px',
+                                height: '16px',
+                                border: '2px solid #bdbdbd',
+                                borderTop: '2px solid #fff',
+                                borderRadius: '50%',
+                                animation: 'spin 1s linear infinite'
+                              }}></div>
+                              <span>Loading...</span>
+                            </div>
+                          ) : (
+                            <>
+                              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="4" fill="#fff"/><text x="12" y="16" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#1877f2">f</text></svg>
+                              <span>Login With Facebook</span>
+                            </>
+                          )}
+                        </button>
+                      </div>
+                    </>
+                  )}
+                  {/* Step 5: Loading state */}
+                  {modalStep === 5 && (
+                    <>
+                      <div className="modal-title">Registering with Meta and Netcore Cloud...</div>
+                      <div style={{textAlign: 'center', padding: '40px 0'}}>
+                        <div style={{
+                          width: '40px',
+                          height: '40px',
+                          border: '4px solid #f3f3f3',
+                          borderTop: '4px solid #ff6d00',
+                          borderRadius: '50%',
+                          animation: 'spin 1s linear infinite',
+                          margin: '0 auto 20px'
+                        }}></div>
+                        <p style={{color: '#666', fontSize: '16px'}}>
+                          {loadingStep === 0 && "Getting your business token..."}
+                          {loadingStep === 1 && "Subscribing to webhooks"}
+                          {loadingStep === 2 && "Extending credit line"}
+                          {loadingStep === 3 && "Registering the phone number"}
+                          {loadingStep === 4 && "Finalizing registration..."}
+                        </p>
+                      </div>
+                    </>
+                  )}
+                  {/* Step 6: Success state */}
+                  {modalStep === 6 && (
+                    <>
+                      <div className="modal-title" style={{color: '#2e7d32'}}>WhatsApp registration completed successfully!</div>
+                      <div style={{textAlign: 'center', padding: '40px 0'}}>
+                        <div style={{
+                          width: '60px',
+                          height: '60px',
+                          borderRadius: '50%',
+                          background: '#2e7d32',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          margin: '0 auto 20px',
+                          fontSize: '30px',
+                          color: 'white'
+                        }}>✓</div>
+                        <p style={{color: '#666', fontSize: '16px'}}>Your WhatsApp sender has been successfully registered with Meta and Netcore Cloud.</p>
+                      </div>
+                      <div className="modal-actions">
+                        <button className="modal-link-btn" onClick={() => { setShowModal(false); setModalStep(null); setIsLoading(false); setIsSuccess(false); }}>CLOSE</button>
+                        <button 
+                          onClick={() => setModalStep(8)}
+                          style={{
+                            backgroundColor: '#ff6d00',
+                            border: 0,
+                            borderRadius: '4px',
+                            color: '#fff',
+                            cursor: 'pointer',
+                            fontFamily: 'Helvetica, Arial, sans-serif',
+                            fontSize: '16px',
+                            fontWeight: 'bold',
+                            height: '40px',
+                            padding: '0 24px'
+                          }}
+                        >
+                          Send Test Message
+                        </button>
+                      </div>
+                    </>
+                  )}
+                  {/* Step 7: Error state */}
+                  {modalStep === 7 && (
+                    <>
+                      <div className="modal-title" style={{color: '#d32f2f'}}>Registration interrupted!</div>
+                      <div style={{textAlign: 'center', padding: '40px 0'}}>
+                        <div style={{
+                          width: '60px',
+                          height: '60px',
+                          borderRadius: '50%',
+                          background: '#d32f2f',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          margin: '0 auto 20px',
+                          fontSize: '30px',
+                          color: 'white'
+                        }}>✕</div>
+                        <p style={{color: '#666', fontSize: '16px'}}>The registration process was interrupted. Please try again to complete your WhatsApp sender registration.</p>
+                      </div>
+                      <div className="modal-actions">
+                        <button className="modal-link-btn" onClick={() => { setShowModal(false); setModalStep(null); setButtonLoading(false); }}>CANCEL</button>
+                        <button 
+                          onClick={handleTryAgain}
+                          style={{
+                            backgroundColor: '#ff6d00',
+                            border: 0,
+                            borderRadius: '4px',
+                            color: '#fff',
+                            cursor: 'pointer',
+                            fontFamily: 'Helvetica, Arial, sans-serif',
+                            fontSize: '16px',
+                            fontWeight: 'bold',
+                            height: '40px',
+                            padding: '0 24px'
+                          }}
+                        >
+                          Try Again
+                        </button>
+                      </div>
+                    </>
+                  )}
+                  {/* Step 8: Test Message */}
+                  {modalStep === 8 && (
+                    <>
+                      <div className="modal-title">Send a test message</div>
+                      <div className="modal-desc">
+                        If you wish to send a test message to yourself, you can do it here.
+                      </div>
+                      <div style={{marginBottom: 20}}>
+                        <label style={{display: 'block', marginBottom: 8, fontWeight: 'bold', color: '#333'}}>
+                          Recipient WhatsApp Number:
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="+1234567890"
+                          value={testMessage.recipient}
+                          onChange={(e) => setTestMessage(prev => ({...prev, recipient: e.target.value}))}
+                          style={{
+                            width: '100%',
+                            padding: '12px',
+                            border: '1px solid #ddd',
+                            borderRadius: '4px',
+                            fontSize: '16px',
+                            fontFamily: 'Helvetica, Arial, sans-serif'
+                          }}
+                        />
+                      </div>
+                      <div style={{marginBottom: 20}}>
+                        <label style={{display: 'block', marginBottom: 8, fontWeight: 'bold', color: '#333'}}>
+                          Message Body:
+                        </label>
+                        <textarea
+                          placeholder="Enter your test message here..."
+                          value={testMessage.body}
+                          onChange={(e) => setTestMessage(prev => ({...prev, body: e.target.value}))}
+                          style={{
+                            width: '100%',
+                            padding: '12px',
+                            border: '1px solid #ddd',
+                            borderRadius: '4px',
+                            fontSize: '16px',
+                            fontFamily: 'Helvetica, Arial, sans-serif',
+                            minHeight: '100px',
+                            resize: 'vertical'
+                          }}
+                        />
+                      </div>
+                      <div className="modal-actions">
+                        <button className="modal-link-btn" onClick={() => { setShowModal(false); setModalStep(null); setTestMessage({ recipient: '', body: '' }); }}>CLOSE</button>
+                        <button 
+                          onClick={handleSendTestMessage}
+                          disabled={sendingTest || !testMessage.recipient || !testMessage.body}
+                          style={{
+                            backgroundColor: sendingTest ? '#ccc' : '#ff6d00',
+                            border: 0,
+                            borderRadius: '4px',
+                            color: '#fff',
+                            cursor: sendingTest ? 'not-allowed' : 'pointer',
+                            fontFamily: 'Helvetica, Arial, sans-serif',
+                            fontSize: '16px',
+                            fontWeight: 'bold',
+                            height: '40px',
+                            padding: '0 24px'
+                          }}
+                        >
+                          {sendingTest ? 'Sending...' : 'Send Test Message'}
+                        </button>
+                      </div>
+                    </>
+                  )}
+
                 </div>
               </div>
             )}
