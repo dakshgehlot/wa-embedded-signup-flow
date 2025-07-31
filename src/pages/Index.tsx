@@ -473,7 +473,7 @@ const Index = () => {
           font-size: 24px;
           font-weight: 700;
           margin-bottom: 8px;
-          color: #ff6d00;
+          color: #000000;
         }
         .modal-desc {
           color: #444;
@@ -600,10 +600,10 @@ const Index = () => {
       `}</style>
       <div 
         className="min-h-screen flex items-center justify-center" 
-        style={{ background: 'linear-gradient(135deg, #fff 0%, #ffe0cc 100%)' }}
+        style={{ background: '#F4F8FF' }}
       >
         <div className="w-full max-w-md px-6">
-          <div className="bg-card rounded-lg shadow-[var(--shadow-soft)] p-8 text-center" style={{border: '1.5px solid #ff6d00'}}>
+          <div className="bg-card rounded-lg shadow-[var(--shadow-soft)] p-8 text-center">
             <div className="mb-8">
               <h1 className="text-2xl font-semibold text-foreground mb-2" style={{color: '#ff6d00'}}>Welcome to Netcore Cloud</h1>
               <p className="text-muted-foreground">Sign in to continue</p>
@@ -620,7 +620,7 @@ const Index = () => {
             {/* Modal Popup */}
             {showModal && (
               <div style={{position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(33,33,33,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000}}>
-                <div className="custom-modal-animate" style={{background: '#fff', borderRadius: 8, padding: 32, minWidth: 400, maxWidth: 480, boxShadow: '0 2px 16px rgba(255,109,0,0.15)', textAlign: 'left', position: 'relative', border: '1.5px solid #ff6d00'}}>
+                <div className="custom-modal-animate" style={{background: '#fff', borderRadius: 8, padding: 32, minWidth: 400, maxWidth: 480, boxShadow: '0 2px 16px rgba(0,0,0,0.15)', textAlign: 'left', position: 'relative'}}>
                   {/* Close button */}
                   <button onClick={() => { setShowModal(false); setModalStep(null); }} style={{position: 'absolute', top: 18, right: 18, background: 'none', border: 'none', fontSize: 22, color: '#ff6d00', cursor: 'pointer'}} aria-label="Close">×</button>
 
@@ -648,7 +648,6 @@ const Index = () => {
                         </div>
                       </div>
                       <div className="modal-actions">
-                        <button className="modal-link-btn" onClick={() => { setShowModal(false); setModalStep(null); }}>CANCEL</button>
                       </div>
                     </>
                   )}
@@ -709,7 +708,6 @@ const Index = () => {
                         </div>
                       )}
                       <div className="migration-actions">
-                        <button className="modal-link-btn" onClick={() => { setShowModal(false); setModalStep(null); }}>CANCEL</button>
                         <button className="modal-link-btn" onClick={() => setModalStep(2)}>BACK</button>
                         <button className={`migration-login-btn ${buttonLoading ? 'loading' : ''}`} disabled={!(migrationChecks.doc && migrationChecks.twofa) || buttonLoading} onClick={handleMigrationLogin}>
                           {buttonLoading ? (
@@ -770,7 +768,6 @@ const Index = () => {
                         </div>
                       )}
                       <div className="migration-actions">
-                        <button className="modal-link-btn" onClick={() => { setShowModal(false); setModalStep(null); }}>CANCEL</button>
                         <button className="modal-link-btn" onClick={() => setModalStep(2)}>BACK</button>
                         <button className={`migration-login-btn ${buttonLoading ? 'loading' : ''}`} disabled={!connectChecks.confirm || buttonLoading} onClick={handleConnectLogin}>
                           {buttonLoading ? (
@@ -935,7 +932,6 @@ const Index = () => {
                         <p style={{color: '#666', fontSize: '16px'}}>The registration process was interrupted. Please try again to complete your WhatsApp sender registration.</p>
                       </div>
                       <div className="modal-actions">
-                        <button className="modal-link-btn" onClick={() => { setShowModal(false); setModalStep(null); setButtonLoading(false); }}>CANCEL</button>
                         <button 
                           onClick={handleTryAgain}
                           style={{
