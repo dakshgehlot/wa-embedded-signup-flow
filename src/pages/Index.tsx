@@ -645,7 +645,7 @@ const Index = () => {
         }
       `}</style>
       {/* Welcome Section */}
-      <div className="bg-white border-b border-gray-200 mx-[24px] my-[20px] px-[32px] py-0">
+      <div className="bg-white border-b border-gray-200 py-0 px-0 my-0 mx-[30px] rounded-md">
         <div className="mx-6 py-6 mt-8">
           <div className="flex items-center justify-between">
             <div className="flex-1">
