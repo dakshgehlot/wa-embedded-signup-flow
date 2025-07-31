@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Facebook } from "lucide-react";
+import { Facebook, Link, ArrowRightLeft } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 // Add these lines to extend the Window interface for TypeScript
@@ -718,18 +718,10 @@ const Index = () => {
                       <div className="modal-title">Register a WhatsApp sender</div>
                       <div className="modal-desc">To connect WhatsApp with <b>Netcore Cloud</b>, you'll need a phone number. Choose one of the options below to get started.</div>
                       <div className="option-card" onClick={handleConnectOutsideInfobip}>
-                        <input 
-                          type="radio" 
-                          name="optionSelect" 
-                          value="connect" 
-                          checked={selectedOption === 'connect'} 
-                          onChange={() => setSelectedOption('connect')}
-                          style={{ 
-                            width: '20px', 
-                            height: '20px', 
-                            marginTop: '2px',
-                            accentColor: '#ff6d00'
-                          }}
+                        <Link 
+                          size={28} 
+                          color="#ff6d00" 
+                          style={{ marginTop: '2px', flexShrink: 0 }}
                         />
                         <div className="option-content">
                           <div className="option-title">Connect a number you have outside of Netcore Cloud</div>
@@ -737,18 +729,10 @@ const Index = () => {
                         </div>
                       </div>
                       <div className="option-card" onClick={handleMigrateNumber}>
-                        <input 
-                          type="radio" 
-                          name="optionSelect" 
-                          value="migrate" 
-                          checked={selectedOption === 'migrate'} 
-                          onChange={() => setSelectedOption('migrate')}
-                          style={{ 
-                            width: '20px', 
-                            height: '20px', 
-                            marginTop: '2px',
-                            accentColor: '#ff6d00'
-                          }}
+                        <ArrowRightLeft 
+                          size={28} 
+                          color="#ff6d00" 
+                          style={{ marginTop: '2px', flexShrink: 0 }}
                         />
                         <div className="option-content">
                           <div className="option-title">Migrate a number from another WhatsApp solution provider or another WhatsApp Business Account</div>
