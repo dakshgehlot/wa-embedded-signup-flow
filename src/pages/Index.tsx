@@ -664,7 +664,7 @@ const Index = () => {
               onClick={openRegisterModal}
               className="ml-6 bg-[#143F93] text-white py-3 px-8 rounded-lg font-medium hover:bg-[#0f3578] transition-colors whitespace-nowrap"
             >
-              Register WhatsApp sender
+              Get started
             </button>
           </div>
         </div>
