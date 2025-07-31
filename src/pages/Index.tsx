@@ -656,9 +656,12 @@ const Index = () => {
                 Let's set up your WhatsApp Business sender so you can start sending messages.
               </p>
             </div>
-            <button onClick={openRegisterModal} className="ml-6 bg-[#143F93] text-white rounded-lg font-medium hover:bg-[#0f3578] transition-colors whitespace-nowrap py-[12px] px-[24px] mx-[2px] my-[12px]">
-              Get started
-            </button>
+            <div className="flex items-center gap-4">
+              <Button onClick={downloadLogs} variant="default">Download logs</Button>
+              <button onClick={openRegisterModal} className="bg-[#143F93] text-white rounded-lg font-medium hover:bg-[#0f3578] transition-colors whitespace-nowrap py-[12px] px-[24px]">
+                Get started
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -668,11 +671,6 @@ const Index = () => {
     }}>
         <div className="w-full max-w-md px-6">
           <div className="bg-card rounded-lg shadow-[var(--shadow-soft)] p-8 text-center px-0 py-0">
-            <div style={{
-            marginTop: 16
-          }}>
-              <Button onClick={downloadLogs} variant="default">Download logs</Button>
-            </div>
             {/* Modal Popup */}
             {showModal && <div style={{
             position: 'fixed',
