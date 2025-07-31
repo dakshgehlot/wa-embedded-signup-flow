@@ -657,7 +657,7 @@ const Index = () => {
               </p>
             </div>
             <div className="flex items-center gap-4">
-              <Button onClick={downloadLogs} variant="default" className="py-[24px] px-[16px]">Download logs</Button>
+              <Button onClick={downloadLogs} variant="default" className="py-[24px] px-[16px] bg-neutral-50 text-[143F93] text-[#143f93]">Download logs</Button>
               <button onClick={openRegisterModal} className="bg-[#143F93] text-white rounded-lg font-medium hover:bg-[#0f3578] transition-colors whitespace-nowrap py-[12px] px-[24px]">
                 Get started
               </button>
