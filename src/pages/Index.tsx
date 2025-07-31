@@ -667,7 +667,7 @@ const Index = () => {
       background: '#F4F8FF'
     }}>
         <div className="w-full max-w-md px-6">
-          <div className="bg-card rounded-lg shadow-[var(--shadow-soft)] p-8 text-center">
+          <div className="bg-card rounded-lg shadow-[var(--shadow-soft)] p-8 text-center px-0 py-0">
             <div style={{
             marginTop: 16
           }}>
