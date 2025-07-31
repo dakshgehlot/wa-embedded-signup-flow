@@ -648,22 +648,34 @@ const Index = () => {
           75% { transform: translateX(5px); }
         }
       `}</style>
+      {/* Welcome Section */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="container mx-auto px-6 py-6">
+          <div className="flex items-center justify-between">
+            <div className="flex-1">
+              <h1 className="text-2xl font-semibold text-black mb-2">
+                👋 Welcome to Netcore Cloud!
+              </h1>
+              <p className="text-gray-600">
+                Let's set up your WhatsApp Business sender so you can start sending messages.
+              </p>
+            </div>
+            <button 
+              onClick={openRegisterModal}
+              className="ml-6 bg-[#143F93] text-white py-3 px-8 rounded-lg font-medium hover:bg-[#0f3578] transition-colors whitespace-nowrap"
+            >
+              Register WhatsApp sender
+            </button>
+          </div>
+        </div>
+      </div>
+
       <div 
         className="min-h-screen flex items-center justify-center" 
         style={{ background: '#F4F8FF' }}
       >
         <div className="w-full max-w-md px-6">
           <div className="bg-card rounded-lg shadow-[var(--shadow-soft)] p-8 text-center">
-            <div className="mb-8">
-              <h1 className="text-2xl font-semibold text-foreground mb-2" style={{color: '#ff6d00'}}>Welcome to Netcore Cloud</h1>
-              <p className="text-muted-foreground">Sign in to continue</p>
-            </div>
-            <button
-              onClick={openRegisterModal}
-              style={{backgroundColor: '#143F93', border: 0, borderRadius: '4px', color: '#fff', cursor: 'pointer', fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '16px', fontWeight: '500', height: '40px', padding: '0 24px', marginBottom: 12}}
-            >
-              Register WhatsApp sender
-            </button>
             <div style={{ marginTop: 16 }}>
               <Button onClick={downloadLogs} variant="outline" style={{borderColor: '#143F93', color: '#143F93'}}>Download logs</Button>
             </div>
