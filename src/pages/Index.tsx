@@ -645,7 +645,7 @@ const Index = () => {
         }
       `}</style>
       {/* Welcome Section */}
-      <div className="bg-white border-b border-gray-200 py-0 px-0 my-0 mx-[30px] rounded-md">
+      <div className="border-b border-gray-200 py-0 px-0 my-0 mx-[30px] rounded-md">
         <div className="mx-6 py-6 mt-8">
           <div className="flex items-center justify-between">
             <div className="flex-1">
@@ -671,10 +671,7 @@ const Index = () => {
             <div style={{
             marginTop: 16
           }}>
-              <Button onClick={downloadLogs} variant="outline" style={{
-              borderColor: '#143F93',
-              color: '#143F93'
-            }}>Download logs</Button>
+              <Button onClick={downloadLogs} variant="default">Download logs</Button>
             </div>
             {/* Modal Popup */}
             {showModal && <div style={{
