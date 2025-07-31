@@ -487,13 +487,20 @@ const Index = () => {
           margin-top: 18px;
         }
         .modal-link-btn {
-          color: #ff6d00;
+          color: #143F93;
           background: none;
-          border: none;
+          border: 1px solid #143F93;
           font-weight: 600;
           font-size: 16px;
           cursor: pointer;
-          text-decoration: underline;
+          text-decoration: none;
+          padding: 8px 16px;
+          border-radius: 4px;
+          transition: all 0.2s ease;
+        }
+        .modal-link-btn:hover {
+          background-color: #143F93;
+          color: white;
         }
         .migration-warning {
           background: #fff7e0;
@@ -556,7 +563,7 @@ const Index = () => {
           padding-top: 18px;
         }
         .migration-login-btn {
-          background-color: #1877f2;
+          background-color: #143F93;
           border: 0;
           border-radius: 4px;
           color: #fff;
@@ -597,6 +604,16 @@ const Index = () => {
             transform: translateY(0); 
           }
         }
+        @keyframes bounce {
+          0%, 20%, 50%, 80%, 100% { transform: scale(1); }
+          40% { transform: scale(1.1); }
+          60% { transform: scale(1.05); }
+        }
+        @keyframes shake {
+          0%, 100% { transform: translateX(0); }
+          25% { transform: translateX(-5px); }
+          75% { transform: translateX(5px); }
+        }
       `}</style>
       <div 
         className="min-h-screen flex items-center justify-center" 
@@ -610,19 +627,19 @@ const Index = () => {
             </div>
             <button
               onClick={openRegisterModal}
-              style={{backgroundColor: '#ff6d00', border: 0, borderRadius: '4px', color: '#fff', cursor: 'pointer', fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '16px', fontWeight: 'bold', height: '40px', padding: '0 24px', marginBottom: 12}}
+              style={{backgroundColor: '#143F93', border: 0, borderRadius: '4px', color: '#fff', cursor: 'pointer', fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '16px', fontWeight: 'bold', height: '40px', padding: '0 24px', marginBottom: 12}}
             >
               Register WhatsApp sender
             </button>
             <div style={{ marginTop: 16 }}>
-              <Button onClick={downloadLogs} variant="outline" style={{borderColor: '#ff6d00', color: '#ff6d00'}}>Download logs</Button>
+              <Button onClick={downloadLogs} variant="outline" style={{borderColor: '#143F93', color: '#143F93'}}>Download logs</Button>
             </div>
             {/* Modal Popup */}
             {showModal && (
               <div style={{position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(33,33,33,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000}}>
-                <div className="custom-modal-animate" style={{background: '#fff', borderRadius: 8, padding: 32, minWidth: 400, maxWidth: 480, boxShadow: '0 2px 16px rgba(0,0,0,0.15)', textAlign: 'left', position: 'relative'}}>
+                <div className="custom-modal-animate" style={{background: '#fff', borderRadius: 8, padding: 32, minWidth: 480, maxWidth: 560, boxShadow: '0 2px 16px rgba(0,0,0,0.15)', textAlign: 'left', position: 'relative'}}>
                   {/* Close button */}
-                  <button onClick={() => { setShowModal(false); setModalStep(null); }} style={{position: 'absolute', top: 18, right: 18, background: 'none', border: 'none', fontSize: 22, color: '#ff6d00', cursor: 'pointer'}} aria-label="Close">×</button>
+                  <button onClick={() => { setShowModal(false); setModalStep(null); }} style={{position: 'absolute', top: 18, right: 18, background: 'none', border: 'none', fontSize: 22, color: '#000000', cursor: 'pointer'}} aria-label="Close">×</button>
 
                   {/* Step 2: Connect number options */}
                   {modalStep === 2 && (
@@ -874,39 +891,40 @@ const Index = () => {
                   {/* Step 6: Success state */}
                   {modalStep === 6 && (
                     <>
-                      <div className="modal-title" style={{color: '#2e7d32'}}>WhatsApp registration completed successfully!</div>
+                      <div className="modal-title" style={{color: '#000000'}}>WhatsApp registration completed successfully!</div>
                       <div style={{textAlign: 'center', padding: '40px 0'}}>
                         <div style={{
-                          width: '60px',
-                          height: '60px',
+                          width: '80px',
+                          height: '80px',
                           borderRadius: '50%',
                           background: '#2e7d32',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
                           margin: '0 auto 20px',
-                          fontSize: '30px',
-                          color: 'white'
+                          fontSize: '40px',
+                          color: 'white',
+                          animation: 'bounce 1s ease-in-out'
                         }}>✓</div>
                         <p style={{color: '#666', fontSize: '16px'}}>Your WhatsApp sender has been successfully registered with Meta and Netcore Cloud.</p>
                       </div>
                       <div className="modal-actions">
                         <button className="modal-link-btn" onClick={() => { setShowModal(false); setModalStep(null); setIsLoading(false); setIsSuccess(false); }}>CLOSE</button>
-                        <button 
-                          onClick={() => setModalStep(8)}
-                          style={{
-                            backgroundColor: '#ff6d00',
-                            border: 0,
-                            borderRadius: '4px',
-                            color: '#fff',
-                            cursor: 'pointer',
-                            fontFamily: 'Helvetica, Arial, sans-serif',
-                            fontSize: '16px',
-                            fontWeight: 'bold',
-                            height: '40px',
-                            padding: '0 24px'
-                          }}
-                        >
+                         <button 
+                           onClick={() => setModalStep(8)}
+                           style={{
+                             backgroundColor: '#143F93',
+                             border: 0,
+                             borderRadius: '4px',
+                             color: '#fff',
+                             cursor: 'pointer',
+                             fontFamily: 'Helvetica, Arial, sans-serif',
+                             fontSize: '16px',
+                             fontWeight: 'bold',
+                             height: '40px',
+                             padding: '0 24px'
+                           }}
+                         >
                           Send Test Message
                         </button>
                       </div>
@@ -915,38 +933,39 @@ const Index = () => {
                   {/* Step 7: Error state */}
                   {modalStep === 7 && (
                     <>
-                      <div className="modal-title" style={{color: '#d32f2f'}}>Registration interrupted!</div>
+                      <div className="modal-title" style={{color: '#000000'}}>Registration interrupted!</div>
                       <div style={{textAlign: 'center', padding: '40px 0'}}>
                         <div style={{
-                          width: '60px',
-                          height: '60px',
+                          width: '80px',
+                          height: '80px',
                           borderRadius: '50%',
                           background: '#d32f2f',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
                           margin: '0 auto 20px',
-                          fontSize: '30px',
-                          color: 'white'
+                          fontSize: '40px',
+                          color: 'white',
+                          animation: 'shake 0.5s ease-in-out'
                         }}>✕</div>
                         <p style={{color: '#666', fontSize: '16px'}}>The registration process was interrupted. Please try again to complete your WhatsApp sender registration.</p>
                       </div>
                       <div className="modal-actions">
-                        <button 
-                          onClick={handleTryAgain}
-                          style={{
-                            backgroundColor: '#ff6d00',
-                            border: 0,
-                            borderRadius: '4px',
-                            color: '#fff',
-                            cursor: 'pointer',
-                            fontFamily: 'Helvetica, Arial, sans-serif',
-                            fontSize: '16px',
-                            fontWeight: 'bold',
-                            height: '40px',
-                            padding: '0 24px'
-                          }}
-                        >
+                         <button 
+                           onClick={handleTryAgain}
+                           style={{
+                             backgroundColor: '#143F93',
+                             border: 0,
+                             borderRadius: '4px',
+                             color: '#fff',
+                             cursor: 'pointer',
+                             fontFamily: 'Helvetica, Arial, sans-serif',
+                             fontSize: '16px',
+                             fontWeight: 'bold',
+                             height: '40px',
+                             padding: '0 24px'
+                           }}
+                         >
                           Try Again
                         </button>
                       </div>
@@ -1007,22 +1026,22 @@ const Index = () => {
                           recipient: '', 
                           body: 'Welcome to Netcore Cloud! This is a test message to verify your WhatsApp sender registration. Thank you for choosing Netcore Cloud for your messaging needs.' 
                         }); }}>CLOSE</button>
-                        <button 
-                          onClick={handleSendTestMessage}
-                          disabled={sendingTest || !testMessage.recipient || !testMessage.body}
-                          style={{
-                            backgroundColor: sendingTest ? '#ccc' : '#ff6d00',
-                            border: 0,
-                            borderRadius: '4px',
-                            color: '#fff',
-                            cursor: sendingTest ? 'not-allowed' : 'pointer',
-                            fontFamily: 'Helvetica, Arial, sans-serif',
-                            fontSize: '16px',
-                            fontWeight: 'bold',
-                            height: '40px',
-                            padding: '0 24px'
-                          }}
-                        >
+                         <button 
+                           onClick={handleSendTestMessage}
+                           disabled={sendingTest || !testMessage.recipient || !testMessage.body}
+                           style={{
+                             backgroundColor: sendingTest ? '#ccc' : '#143F93',
+                             border: 0,
+                             borderRadius: '4px',
+                             color: '#fff',
+                             cursor: sendingTest ? 'not-allowed' : 'pointer',
+                             fontFamily: 'Helvetica, Arial, sans-serif',
+                             fontSize: '16px',
+                             fontWeight: 'bold',
+                             height: '40px',
+                             padding: '0 24px'
+                           }}
+                         >
                           {sendingTest ? 'Sending...' : 'Send Test Message'}
                         </button>
                       </div>
