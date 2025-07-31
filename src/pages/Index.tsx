@@ -39,6 +39,7 @@ const Index = () => {
   const [sendingTest, setSendingTest] = useState(false);
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [selectedOption, setSelectedOption] = useState('');
 
   // Helper to add log with timestamp
   const addLog = (msg: string) => {
@@ -167,12 +168,14 @@ const Index = () => {
 
   // Second modal options
   const handleConnectOutsideInfobip = () => {
+    setSelectedOption('connect');
     setModalStep(4);
     setConnectChecks({
       confirm: false
     });
   };
   const handleMigrateNumber = () => {
+    setSelectedOption('migrate');
     setModalStep(3);
     setMigrationChecks({
       doc: false,
@@ -400,6 +403,7 @@ const Index = () => {
     });
     setSendingTest(false);
     setShowSnackbar(false);
+    setSelectedOption('');
   };
 
   // Download logs as txt file
@@ -714,22 +718,38 @@ const Index = () => {
                       <div className="modal-title">Register a WhatsApp sender</div>
                       <div className="modal-desc">To connect WhatsApp with <b>Netcore Cloud</b>, you'll need a phone number. Choose one of the options below to get started.</div>
                       <div className="option-card" onClick={handleConnectOutsideInfobip}>
-                        <span className="option-icon" style={{
-                    color: '#ff6d00'
-                  }}>
-                          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="3" stroke="#ff6d00" strokeWidth="1.5" /><path d="M8 12h8" stroke="#ff6d00" strokeWidth="1.5" strokeLinecap="round" /><path d="M12 8v8" stroke="#ff6d00" strokeWidth="1.5" strokeLinecap="round" /></svg>
-                        </span>
+                        <input 
+                          type="radio" 
+                          name="optionSelect" 
+                          value="connect" 
+                          checked={selectedOption === 'connect'} 
+                          onChange={() => setSelectedOption('connect')}
+                          style={{ 
+                            width: '20px', 
+                            height: '20px', 
+                            marginTop: '2px',
+                            accentColor: '#ff6d00'
+                          }}
+                        />
                         <div className="option-content">
                           <div className="option-title">Connect a number you have outside of Netcore Cloud</div>
                           <div className="option-desc">You will need to delete any existing WhatsApp accounts connected to the number. Verification with SMS or phone call required.</div>
                         </div>
                       </div>
                       <div className="option-card" onClick={handleMigrateNumber}>
-                        <span className="option-icon" style={{
-                    color: '#ff6d00'
-                  }}>
-                          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="3" stroke="#ff6d00" strokeWidth="1.5" /><path d="M8 12h8" stroke="#ff6d00" strokeWidth="1.5" strokeLinecap="round" /><path d="M12 8v8" stroke="#ff6d00" strokeWidth="1.5" strokeLinecap="round" /><path d="M6 18l12-12" stroke="#ff6d00" strokeWidth="1.5" strokeLinecap="round" /></svg>
-                        </span>
+                        <input 
+                          type="radio" 
+                          name="optionSelect" 
+                          value="migrate" 
+                          checked={selectedOption === 'migrate'} 
+                          onChange={() => setSelectedOption('migrate')}
+                          style={{ 
+                            width: '20px', 
+                            height: '20px', 
+                            marginTop: '2px',
+                            accentColor: '#ff6d00'
+                          }}
+                        />
                         <div className="option-content">
                           <div className="option-title">Migrate a number from another WhatsApp solution provider or another WhatsApp Business Account</div>
                           <div className="option-desc">Use this option to transfer the number from another solution provider or an existing WhatsApp Business Account (WABA) set up on Netcore Cloud.</div>
