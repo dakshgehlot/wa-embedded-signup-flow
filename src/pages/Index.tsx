@@ -423,6 +423,13 @@ const Index = () => {
 
   return (
     <>
+      {/* Header with Netcore logo */}
+      <header className="w-full bg-white border-b border-gray-200 px-6 py-4">
+        <div className="flex items-center">
+          <img src="/netcore-logo.svg" alt="Netcore" className="h-8" />
+        </div>
+      </header>
+
       <style>{`
         @keyframes modalFadeIn {
           0% { opacity: 0; transform: scale(0.9); }
@@ -490,13 +497,38 @@ const Index = () => {
           color: #143F93;
           background: none;
           border: 1px solid #143F93;
-          font-weight: 600;
+          font-weight: 500;
           font-size: 16px;
           cursor: pointer;
           text-decoration: none;
           padding: 8px 16px;
           border-radius: 4px;
           transition: all 0.2s ease;
+        }
+        
+        /* Custom checkbox styles */
+        .custom-checkbox {
+          width: 18px;
+          height: 18px;
+          border: 2px solid #143F93;
+          border-radius: 3px;
+          background: white;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.2s ease;
+        }
+        
+        .custom-checkbox.checked {
+          background: #143F93;
+          border-color: #143F93;
+        }
+        
+        .custom-checkbox .checkmark {
+          color: white;
+          font-size: 12px;
+          font-weight: bold;
         }
         .modal-link-btn:hover {
           background-color: #143F93;
@@ -550,9 +582,10 @@ const Index = () => {
           font-size: 15px;
         }
         .migration-checkbox input[type='checkbox'] {
-          accent-color: #ff6d00;
+          accent-color: #143F93;
           width: 18px;
           height: 18px;
+          border: 2px solid #143F93;
         }
         .migration-actions {
           display: flex;
@@ -570,7 +603,7 @@ const Index = () => {
           cursor: pointer;
           font-family: Helvetica, Arial, sans-serif;
           font-size: 16px;
-          font-weight: bold;
+          font-weight: 500;
           height: 40px;
           padding: 0 24px;
           display: flex;
@@ -627,7 +660,7 @@ const Index = () => {
             </div>
             <button
               onClick={openRegisterModal}
-              style={{backgroundColor: '#143F93', border: 0, borderRadius: '4px', color: '#fff', cursor: 'pointer', fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '16px', fontWeight: 'bold', height: '40px', padding: '0 24px', marginBottom: 12}}
+              style={{backgroundColor: '#143F93', border: 0, borderRadius: '4px', color: '#fff', cursor: 'pointer', fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '16px', fontWeight: '500', height: '40px', padding: '0 24px', marginBottom: 12}}
             >
               Register WhatsApp sender
             </button>
@@ -912,18 +945,18 @@ const Index = () => {
                         <button className="modal-link-btn" onClick={() => { setShowModal(false); setModalStep(null); setIsLoading(false); setIsSuccess(false); }}>CLOSE</button>
                          <button 
                            onClick={() => setModalStep(8)}
-                           style={{
-                             backgroundColor: '#143F93',
-                             border: 0,
-                             borderRadius: '4px',
-                             color: '#fff',
-                             cursor: 'pointer',
-                             fontFamily: 'Helvetica, Arial, sans-serif',
-                             fontSize: '16px',
-                             fontWeight: 'bold',
-                             height: '40px',
-                             padding: '0 24px'
-                           }}
+                            style={{
+                              backgroundColor: '#143F93',
+                              border: 0,
+                              borderRadius: '4px',
+                              color: '#fff',
+                              cursor: 'pointer',
+                              fontFamily: 'Helvetica, Arial, sans-serif',
+                              fontSize: '16px',
+                              fontWeight: '500',
+                              height: '40px',
+                              padding: '0 24px'
+                            }}
                          >
                           Send Test Message
                         </button>
@@ -953,18 +986,18 @@ const Index = () => {
                       <div className="modal-actions">
                          <button 
                            onClick={handleTryAgain}
-                           style={{
-                             backgroundColor: '#143F93',
-                             border: 0,
-                             borderRadius: '4px',
-                             color: '#fff',
-                             cursor: 'pointer',
-                             fontFamily: 'Helvetica, Arial, sans-serif',
-                             fontSize: '16px',
-                             fontWeight: 'bold',
-                             height: '40px',
-                             padding: '0 24px'
-                           }}
+                            style={{
+                              backgroundColor: '#143F93',
+                              border: 0,
+                              borderRadius: '4px',
+                              color: '#fff',
+                              cursor: 'pointer',
+                              fontFamily: 'Helvetica, Arial, sans-serif',
+                              fontSize: '16px',
+                              fontWeight: '500',
+                              height: '40px',
+                              padding: '0 24px'
+                            }}
                          >
                           Try Again
                         </button>
@@ -1029,18 +1062,18 @@ const Index = () => {
                          <button 
                            onClick={handleSendTestMessage}
                            disabled={sendingTest || !testMessage.recipient || !testMessage.body}
-                           style={{
-                             backgroundColor: sendingTest ? '#ccc' : '#143F93',
-                             border: 0,
-                             borderRadius: '4px',
-                             color: '#fff',
-                             cursor: sendingTest ? 'not-allowed' : 'pointer',
-                             fontFamily: 'Helvetica, Arial, sans-serif',
-                             fontSize: '16px',
-                             fontWeight: 'bold',
-                             height: '40px',
-                             padding: '0 24px'
-                           }}
+                            style={{
+                              backgroundColor: sendingTest ? '#ccc' : '#143F93',
+                              border: 0,
+                              borderRadius: '4px',
+                              color: '#fff',
+                              cursor: sendingTest ? 'not-allowed' : 'pointer',
+                              fontFamily: 'Helvetica, Arial, sans-serif',
+                              fontSize: '16px',
+                              fontWeight: '500',
+                              height: '40px',
+                              padding: '0 24px'
+                            }}
                          >
                           {sendingTest ? 'Sending...' : 'Send Test Message'}
                         </button>
