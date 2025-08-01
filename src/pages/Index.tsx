@@ -1018,15 +1018,15 @@ const Index = () => {
                   padding: '40px 0'
                 }}>
                         <div style={{
-                    width: '80px',
-                    height: '80px',
+                    width: '120px',
+                    height: '120px',
                     borderRadius: '50%',
                     background: '#2e7d32',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     margin: '0 auto 20px',
-                    fontSize: '80px',
+                    fontSize: '60px',
                     color: 'white',
                     animation: 'bounce 1s ease-in-out'
                   }}>✓</div>
