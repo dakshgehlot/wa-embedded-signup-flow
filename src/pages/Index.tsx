@@ -674,23 +674,21 @@ const Index = () => {
         }
       `}</style>
       {/* Welcome Section */}
-      <div className="border-b border-gray-200 py-0 px-0 my-0 mx-[30px] rounded-md bg-white">
-        <div className="mx-6 py-6 mt-8">
-          <div className="flex items-center justify-between">
-            <div className="flex-1">
-              <h1 className="text-2xl font-semibold text-black mb-2">
-                👋 Welcome to Netcore Cloud!
-              </h1>
-              <p className="text-gray-600">
-                Let's set up your WhatsApp Business sender so you can start sending messages.
-              </p>
-            </div>
-            <div className="flex items-center gap-4">
-              <Button onClick={downloadLogs} variant="default" className="py-[24px] px-[16px] bg-neutral-50 text-[143F93] text-[#143f93]">Download logs</Button>
-              <button onClick={openRegisterModal} className="bg-[#143F93] text-white rounded-lg font-medium hover:bg-[#0f3578] transition-colors whitespace-nowrap py-[12px] px-[24px]">
-                Get started
-              </button>
-            </div>
+      <div className="flex justify-center items-center min-h-[60vh] px-6">
+        <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full text-center">
+          <h1 className="text-2xl font-semibold text-black mb-4">
+            👋 Welcome to Netcore Cloud!
+          </h1>
+          <p className="text-gray-600 mb-6">
+            Let's set up your WhatsApp Business sender so you can start sending messages.
+          </p>
+          <div className="flex flex-col gap-4">
+            <Button onClick={downloadLogs} variant="default" className="w-full py-3 bg-neutral-50 text-[#143f93]">
+              Download logs
+            </Button>
+            <button onClick={openRegisterModal} className="w-full bg-[#143F93] text-white rounded-lg font-medium hover:bg-[#0f3578] transition-colors py-3">
+              Get started
+            </button>
           </div>
         </div>
       </div>
