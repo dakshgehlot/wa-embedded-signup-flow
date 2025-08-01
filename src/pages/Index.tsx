@@ -943,7 +943,8 @@ const Index = () => {
                     }}>
                               <span style={{
                         marginRight: '8px',
-                        color: '#2e7d32'
+                        color: '#2e7d32',
+                        fontSize: '20px'
                       }}>✓</span>
                               Getting your business token...
                             </div>}
@@ -956,7 +957,8 @@ const Index = () => {
                     }}>
                               <span style={{
                         marginRight: '8px',
-                        color: '#2e7d32'
+                        color: '#2e7d32',
+                        fontSize: '20px'
                       }}>✓</span>
                               Subscribing to webhooks
                             </div>}
@@ -969,7 +971,8 @@ const Index = () => {
                     }}>
                               <span style={{
                         marginRight: '8px',
-                        color: '#2e7d32'
+                        color: '#2e7d32',
+                        fontSize: '20px'
                       }}>✓</span>
                               Extending credit line
                             </div>}
@@ -982,7 +985,8 @@ const Index = () => {
                     }}>
                               <span style={{
                         marginRight: '8px',
-                        color: '#2e7d32'
+                        color: '#2e7d32',
+                        fontSize: '20px'
                       }}>✓</span>
                               Registering the phone number
                             </div>}
@@ -995,7 +999,8 @@ const Index = () => {
                     }}>
                               <span style={{
                         marginRight: '8px',
-                        color: '#2e7d32'
+                        color: '#2e7d32',
+                        fontSize: '20px'
                       }}>✓</span>
                               Finalizing registration...
                             </div>}
