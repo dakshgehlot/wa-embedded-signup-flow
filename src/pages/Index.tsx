@@ -768,7 +768,7 @@ const Index = () => {
                         </ul>
                       </div>
                       <div className="migration-section">
-                        <div className="migration-section-title"><span className="warn">⚠️</span> Will not be migrated:</div>
+                        <div className="migration-section-title"><span className="warn">❌</span> Will not be migrated:</div>
                         <ul className="migration-list">
                           <li>Low quality, rejected, or pending templates</li>
                           <li>Messages and chat history for senders hosted on local servers (please back up all conversations you want to keep)</li>
