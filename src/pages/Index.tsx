@@ -573,10 +573,12 @@ const Index = () => {
           color: white;
         }
         .migration-icon-success {
-          background-color: #2e7d32;
+          background-color: rgba(46, 125, 50, 0.15);
+          color: #2e7d32;
         }
         .migration-icon-error {
-          background-color: #d32f2f;
+          background-color: rgba(211, 47, 47, 0.15);
+          color: #d32f2f;
         }
         .migration-section-title .check {
           color: #2e7d32;
