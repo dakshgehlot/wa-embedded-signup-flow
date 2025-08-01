@@ -842,26 +842,7 @@ const Index = () => {
                         </div>}
                       <div className="migration-actions">
                         <button className="modal-link-btn" onClick={() => setModalStep(2)}>BACK</button>
-                        <button 
-                          style={{
-                            backgroundColor: buttonLoading ? '#ccc' : '#1877f2',
-                            border: 0,
-                            borderRadius: '4px',
-                            color: '#fff',
-                            cursor: buttonLoading ? 'not-allowed' : 'pointer',
-                            fontFamily: 'Helvetica, Arial, sans-serif',
-                            fontSize: '16px',
-                            fontWeight: 'bold',
-                            height: '40px',
-                            padding: '0 24px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '8px',
-                            justifyContent: 'center'
-                          }}
-                          disabled={!(migrationChecks.doc && migrationChecks.twofa) || buttonLoading} 
-                          onClick={handleMigrationLogin}
-                        >
+                        <button className={`migration-login-btn ${buttonLoading ? 'loading' : ''}`} disabled={!(migrationChecks.doc && migrationChecks.twofa) || buttonLoading} onClick={handleMigrationLogin}>
                           {buttonLoading ? <div style={{
                       display: 'flex',
                       alignItems: 'center',
@@ -878,7 +859,7 @@ const Index = () => {
                               <span>Loading...</span>
                             </div> : <>
                               <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="4" fill="#fff" /><text x="12" y="16" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#1877f2">f</text></svg>
-                              <span>Login with Facebook</span>
+                              <span>Login With Facebook</span>
                             </>}
                         </button>
                       </div>
@@ -931,26 +912,7 @@ const Index = () => {
                         </div>}
                       <div className="migration-actions">
                         <button className="modal-link-btn" onClick={() => setModalStep(2)}>BACK</button>
-                        <button 
-                          style={{
-                            backgroundColor: buttonLoading ? '#ccc' : '#1877f2',
-                            border: 0,
-                            borderRadius: '4px',
-                            color: '#fff',
-                            cursor: buttonLoading ? 'not-allowed' : 'pointer',
-                            fontFamily: 'Helvetica, Arial, sans-serif',
-                            fontSize: '16px',
-                            fontWeight: 'bold',
-                            height: '40px',
-                            padding: '0 24px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '8px',
-                            justifyContent: 'center'
-                          }}
-                          disabled={!connectChecks.confirm || buttonLoading} 
-                          onClick={handleConnectLogin}
-                        >
+                        <button className={`migration-login-btn ${buttonLoading ? 'loading' : ''}`} disabled={!connectChecks.confirm || buttonLoading} onClick={handleConnectLogin}>
                           {buttonLoading ? <div style={{
                       display: 'flex',
                       alignItems: 'center',
@@ -967,7 +929,7 @@ const Index = () => {
                               <span>Loading...</span>
                             </div> : <>
                               <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="4" fill="#fff" /><text x="12" y="16" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#1877f2">f</text></svg>
-                              <span>Login with Facebook</span>
+                              <span>Login With Facebook</span>
                             </>}
                         </button>
                       </div>
