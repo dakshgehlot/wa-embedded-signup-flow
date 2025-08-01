@@ -922,7 +922,7 @@ const Index = () => {
                     width: '40px',
                     height: '40px',
                     border: '4px solid #f3f3f3',
-                    borderTop: '4px solid #ff6d00',
+                    borderTop: '4px solid #143F93',
                     borderRadius: '50%',
                     animation: 'spin 1s linear infinite',
                     margin: '0 auto 20px'
@@ -930,14 +930,14 @@ const Index = () => {
                         <div style={{
                     color: '#666',
                     fontSize: '16px',
-                    textAlign: 'center',
+                    textAlign: 'left',
                     maxWidth: '400px',
                     margin: '0 auto'
                   }}>
-                          {loadingStep >= 0 && <div style={{
+                          {loadingStep === 0 && <div style={{
                       display: 'flex',
                       alignItems: 'center',
-                      justifyContent: 'center',
+                      justifyContent: 'flex-start',
                       marginBottom: '8px',
                       animation: 'fadeInUp 0.5s ease-out'
                     }}>
@@ -947,10 +947,10 @@ const Index = () => {
                       }}>✓</span>
                               Getting your business token...
                             </div>}
-                          {loadingStep >= 1 && <div style={{
+                          {loadingStep === 1 && <div style={{
                       display: 'flex',
                       alignItems: 'center',
-                      justifyContent: 'center',
+                      justifyContent: 'flex-start',
                       marginBottom: '8px',
                       animation: 'fadeInUp 0.5s ease-out'
                     }}>
@@ -960,10 +960,10 @@ const Index = () => {
                       }}>✓</span>
                               Subscribing to webhooks
                             </div>}
-                          {loadingStep >= 2 && <div style={{
+                          {loadingStep === 2 && <div style={{
                       display: 'flex',
                       alignItems: 'center',
-                      justifyContent: 'center',
+                      justifyContent: 'flex-start',
                       marginBottom: '8px',
                       animation: 'fadeInUp 0.5s ease-out'
                     }}>
@@ -973,10 +973,10 @@ const Index = () => {
                       }}>✓</span>
                               Extending credit line
                             </div>}
-                          {loadingStep >= 3 && <div style={{
+                          {loadingStep === 3 && <div style={{
                       display: 'flex',
                       alignItems: 'center',
-                      justifyContent: 'center',
+                      justifyContent: 'flex-start',
                       marginBottom: '8px',
                       animation: 'fadeInUp 0.5s ease-out'
                     }}>
@@ -986,10 +986,10 @@ const Index = () => {
                       }}>✓</span>
                               Registering the phone number
                             </div>}
-                          {loadingStep >= 4 && <div style={{
+                          {loadingStep === 4 && <div style={{
                       display: 'flex',
                       alignItems: 'center',
-                      justifyContent: 'center',
+                      justifyContent: 'flex-start',
                       marginBottom: '8px',
                       animation: 'fadeInUp 0.5s ease-out'
                     }}>
