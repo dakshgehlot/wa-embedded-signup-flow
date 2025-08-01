@@ -561,6 +561,23 @@ const Index = () => {
           align-items: center;
           gap: 6px;
         }
+        .migration-icon {
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 12px;
+          font-weight: bold;
+          color: white;
+        }
+        .migration-icon-success {
+          background-color: #2e7d32;
+        }
+        .migration-icon-error {
+          background-color: #d32f2f;
+        }
         .migration-section-title .check {
           color: #2e7d32;
           font-size: 18px;
@@ -759,7 +776,7 @@ const Index = () => {
                         </div>
                       </div>
                       <div className="migration-section">
-                        <div className="migration-section-title"><span className="check">✔️</span> Will be migrated:</div>
+                        <div className="migration-section-title"><span className="migration-icon migration-icon-success">✓</span> Will be migrated:</div>
                         <ul className="migration-list">
                           <li>Display name, sender quality rating, and messaging limits</li>
                           <li>Official Business Account status</li>
@@ -768,7 +785,7 @@ const Index = () => {
                         </ul>
                       </div>
                       <div className="migration-section">
-                        <div className="migration-section-title"><span className="warn">❌</span> Will not be migrated:</div>
+                        <div className="migration-section-title"><span className="migration-icon migration-icon-error">✕</span> Will not be migrated:</div>
                         <ul className="migration-list">
                           <li>Low quality, rejected, or pending templates</li>
                           <li>Messages and chat history for senders hosted on local servers (please back up all conversations you want to keep)</li>
