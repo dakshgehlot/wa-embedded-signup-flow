@@ -423,75 +423,38 @@ const Index = () => {
     }, 0);
   };
   return <>
-      {/* Background geometric design similar to Netcore screenshot */}
-      <div className="fixed inset-0 -z-10 overflow-hidden bg-gradient-to-br from-slate-50 to-blue-50">
-        {/* Dashboard interface elements */}
-        <div className="absolute top-20 right-10 w-48 h-32 bg-white/60 rounded-lg border border-gray-200/50 shadow-sm backdrop-blur-sm">
-          <div className="p-3">
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-3 h-3 bg-blue-500 rounded"></div>
-              <div className="w-16 h-2 bg-gray-200 rounded"></div>
-            </div>
-            <div className="space-y-1">
-              <div className="w-full h-2 bg-gray-100 rounded"></div>
-              <div className="w-3/4 h-2 bg-gray-100 rounded"></div>
-            </div>
-          </div>
-        </div>
-
-        <div className="absolute top-48 right-24 w-40 h-28 bg-white/60 rounded-lg border border-gray-200/50 shadow-sm backdrop-blur-sm">
-          <div className="p-3">
-            <div className="w-24 h-16 bg-gradient-to-r from-orange-200 to-orange-300 rounded mb-2"></div>
-            <div className="w-full h-1.5 bg-gray-100 rounded"></div>
-          </div>
-        </div>
-
-        <div className="absolute bottom-32 right-16 w-44 h-36 bg-white/60 rounded-lg border border-gray-200/50 shadow-sm backdrop-blur-sm">
-          <div className="p-3">
-            <div className="grid grid-cols-3 gap-2 mb-2">
-              <div className="w-8 h-8 bg-blue-100 rounded flex items-center justify-center">📱</div>
-              <div className="w-8 h-8 bg-green-100 rounded flex items-center justify-center">✉️</div>
-              <div className="w-8 h-8 bg-purple-100 rounded flex items-center justify-center">📊</div>
-            </div>
-            <div className="space-y-1">
-              <div className="w-full h-1.5 bg-gray-100 rounded"></div>
-              <div className="w-2/3 h-1.5 bg-gray-100 rounded"></div>
-            </div>
-          </div>
-        </div>
-
-        {/* Floating geometric elements */}
-        <div className="absolute top-32 left-20 w-6 h-6 bg-blue-400/30 rounded rotate-45"></div>
-        <div className="absolute top-72 left-32 w-4 h-4 bg-orange-400/30 rounded-full"></div>
-        <div className="absolute bottom-48 left-24 w-5 h-5 bg-teal-400/30 rounded rotate-12"></div>
-        <div className="absolute top-56 left-1/3 w-3 h-3 bg-purple-400/30 rounded-full"></div>
-
-        {/* Connecting flow lines */}
-        <svg className="absolute inset-0 w-full h-full opacity-30" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="flowGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#3b82f6" stopOpacity="0"/>
-              <stop offset="50%" stopColor="#3b82f6" stopOpacity="0.4"/>
-              <stop offset="100%" stopColor="#3b82f6" stopOpacity="0"/>
-            </linearGradient>
-            <linearGradient id="flowGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#06b6d4" stopOpacity="0"/>
-              <stop offset="50%" stopColor="#06b6d4" stopOpacity="0.3"/>
-              <stop offset="100%" stopColor="#06b6d4" stopOpacity="0"/>
-            </linearGradient>
-          </defs>
-          
-          {/* Curved connecting lines between interface elements */}
-          <path d="M120,160 Q300,120 480,180 Q660,240 800,200" stroke="url(#flowGradient1)" strokeWidth="2" fill="none" strokeDasharray="5,5"/>
-          <path d="M160,280 Q350,320 540,300 Q720,280 900,320" stroke="url(#flowGradient2)" strokeWidth="2" fill="none" strokeDasharray="3,7"/>
-          <path d="M80,380 Q250,340 420,380 Q590,420 750,400" stroke="url(#flowGradient1)" strokeWidth="1.5" fill="none" strokeDasharray="8,4"/>
-          
-          {/* Dotted connection points */}
-          <circle cx="150" cy="200" r="2" fill="#3b82f6" opacity="0.4"/>
-          <circle cx="320" cy="250" r="2" fill="#06b6d4" opacity="0.4"/>
-          <circle cx="520" cy="320" r="2" fill="#8b5cf6" opacity="0.4"/>
-          <circle cx="720" cy="280" r="2" fill="#f59e0b" opacity="0.4"/>
-        </svg>
+      {/* Organic blob background pattern exactly like the uploaded image */}
+      <div className="fixed inset-0 -z-10 overflow-hidden bg-gray-50">
+        {/* Large organic blob shapes in light green */}
+        <div className="absolute top-8 left-8 w-96 h-80 bg-green-100/40 rounded-[60px] transform rotate-12 blur-[1px]"></div>
+        <div className="absolute top-32 left-16 w-80 h-96 bg-green-100/30 rounded-[80px] transform -rotate-6 blur-[1px]"></div>
+        <div className="absolute top-4 left-32 w-72 h-72 bg-green-100/35 rounded-[70px] transform rotate-3 blur-[1px]"></div>
+        
+        {/* Medium blob shapes */}
+        <div className="absolute top-48 left-72 w-64 h-48 bg-green-100/25 rounded-[50px] transform rotate-45 blur-[1px]"></div>
+        <div className="absolute top-24 left-96 w-56 h-64 bg-green-100/30 rounded-[60px] transform -rotate-12 blur-[1px]"></div>
+        
+        {/* Smaller organic shapes */}
+        <div className="absolute top-64 left-24 w-48 h-40 bg-green-100/20 rounded-[40px] transform rotate-24 blur-[1px]"></div>
+        <div className="absolute top-16 left-64 w-40 h-56 bg-green-100/25 rounded-[45px] transform -rotate-18 blur-[1px]"></div>
+        
+        {/* Additional scattered blob elements */}
+        <div className="absolute top-72 left-48 w-32 h-48 bg-green-100/15 rounded-[35px] transform rotate-36 blur-[1px]"></div>
+        <div className="absolute top-8 left-80 w-36 h-32 bg-green-100/20 rounded-[30px] transform -rotate-24 blur-[1px]"></div>
+        
+        {/* Right side blob shapes */}
+        <div className="absolute top-12 right-16 w-72 h-96 bg-green-100/30 rounded-[70px] transform rotate-15 blur-[1px]"></div>
+        <div className="absolute top-56 right-32 w-64 h-80 bg-green-100/25 rounded-[60px] transform -rotate-9 blur-[1px]"></div>
+        <div className="absolute top-96 right-8 w-56 h-64 bg-green-100/35 rounded-[50px] transform rotate-21 blur-[1px]"></div>
+        
+        {/* Bottom organic shapes */}
+        <div className="absolute bottom-8 left-24 w-80 h-72 bg-green-100/30 rounded-[65px] transform -rotate-12 blur-[1px]"></div>
+        <div className="absolute bottom-32 left-64 w-64 h-56 bg-green-100/25 rounded-[55px] transform rotate-18 blur-[1px]"></div>
+        <div className="absolute bottom-16 right-24 w-72 h-64 bg-green-100/28 rounded-[60px] transform -rotate-15 blur-[1px]"></div>
+        
+        {/* Center area subtle shapes */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-64 bg-green-100/15 rounded-[45px] rotate-6 blur-[1px]"></div>
+        <div className="absolute top-1/3 left-1/3 w-40 h-48 bg-green-100/20 rounded-[40px] transform -rotate-12 blur-[1px]"></div>
       </div>
 
       {/* Header with Netcore logo */}
