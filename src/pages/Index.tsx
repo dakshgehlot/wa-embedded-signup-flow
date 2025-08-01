@@ -423,8 +423,31 @@ const Index = () => {
     }, 0);
   };
   return <>
+      {/* Background geometric design */}
+      <div className="fixed inset-0 -z-10 overflow-hidden">
+        <div className="absolute top-20 left-10 w-32 h-32 bg-blue-100 rounded-full opacity-60"></div>
+        <div className="absolute top-40 right-20 w-24 h-24 bg-orange-100 rounded-lg opacity-50 rotate-45"></div>
+        <div className="absolute bottom-32 left-20 w-28 h-28 bg-teal-100 rounded-full opacity-40"></div>
+        <div className="absolute top-60 left-1/3 w-16 h-16 bg-purple-100 rounded-lg opacity-45 rotate-12"></div>
+        <div className="absolute bottom-20 right-1/4 w-20 h-20 bg-pink-100 rounded-full opacity-35"></div>
+        <div className="absolute top-1/2 right-10 w-14 h-14 bg-yellow-100 rounded-lg opacity-40 -rotate-12"></div>
+        
+        {/* Connecting lines */}
+        <svg className="absolute inset-0 w-full h-full opacity-20" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+              <circle cx="20" cy="20" r="1" fill="#94a3b8"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#dots)"/>
+          <path d="M100,200 Q200,100 400,200 T800,200" stroke="#e2e8f0" strokeWidth="1" fill="none"/>
+          <path d="M200,400 Q400,300 600,400 T1000,400" stroke="#e2e8f0" strokeWidth="1" fill="none"/>
+          <path d="M50,300 Q250,200 450,300 T850,300" stroke="#e2e8f0" strokeWidth="1" fill="none"/>
+        </svg>
+      </div>
+
       {/* Header with Netcore logo */}
-      <header className="w-full bg-white border-b border-gray-200 px-6 py-4">
+      <header className="relative w-full bg-white/90 backdrop-blur-sm border-b border-gray-200 px-6 py-4">
         <div className="flex items-center">
           <img src="/netcore-logo.svg" alt="Netcore" className="h-8" />
         </div>
