@@ -1018,8 +1018,8 @@ const Index = () => {
                   padding: '40px 0'
                 }}>
                         <div style={{
-                    width: '120px',
-                    height: '120px',
+                    width: '80px',
+                    height: '80px',
                     borderRadius: '50%',
                     background: '#2e7d32',
                     display: 'flex',
