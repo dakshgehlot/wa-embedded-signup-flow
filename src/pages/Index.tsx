@@ -423,26 +423,74 @@ const Index = () => {
     }, 0);
   };
   return <>
-      {/* Background geometric design */}
-      <div className="fixed inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-20 left-10 w-32 h-32 bg-blue-100 rounded-full opacity-60"></div>
-        <div className="absolute top-40 right-20 w-24 h-24 bg-orange-100 rounded-lg opacity-50 rotate-45"></div>
-        <div className="absolute bottom-32 left-20 w-28 h-28 bg-teal-100 rounded-full opacity-40"></div>
-        <div className="absolute top-60 left-1/3 w-16 h-16 bg-purple-100 rounded-lg opacity-45 rotate-12"></div>
-        <div className="absolute bottom-20 right-1/4 w-20 h-20 bg-pink-100 rounded-full opacity-35"></div>
-        <div className="absolute top-1/2 right-10 w-14 h-14 bg-yellow-100 rounded-lg opacity-40 -rotate-12"></div>
-        
-        {/* Connecting lines */}
-        <svg className="absolute inset-0 w-full h-full opacity-20" xmlns="http://www.w3.org/2000/svg">
+      {/* Background geometric design similar to Netcore screenshot */}
+      <div className="fixed inset-0 -z-10 overflow-hidden bg-gradient-to-br from-slate-50 to-blue-50">
+        {/* Dashboard interface elements */}
+        <div className="absolute top-20 right-10 w-48 h-32 bg-white/60 rounded-lg border border-gray-200/50 shadow-sm backdrop-blur-sm">
+          <div className="p-3">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-3 h-3 bg-blue-500 rounded"></div>
+              <div className="w-16 h-2 bg-gray-200 rounded"></div>
+            </div>
+            <div className="space-y-1">
+              <div className="w-full h-2 bg-gray-100 rounded"></div>
+              <div className="w-3/4 h-2 bg-gray-100 rounded"></div>
+            </div>
+          </div>
+        </div>
+
+        <div className="absolute top-48 right-24 w-40 h-28 bg-white/60 rounded-lg border border-gray-200/50 shadow-sm backdrop-blur-sm">
+          <div className="p-3">
+            <div className="w-24 h-16 bg-gradient-to-r from-orange-200 to-orange-300 rounded mb-2"></div>
+            <div className="w-full h-1.5 bg-gray-100 rounded"></div>
+          </div>
+        </div>
+
+        <div className="absolute bottom-32 right-16 w-44 h-36 bg-white/60 rounded-lg border border-gray-200/50 shadow-sm backdrop-blur-sm">
+          <div className="p-3">
+            <div className="grid grid-cols-3 gap-2 mb-2">
+              <div className="w-8 h-8 bg-blue-100 rounded flex items-center justify-center">📱</div>
+              <div className="w-8 h-8 bg-green-100 rounded flex items-center justify-center">✉️</div>
+              <div className="w-8 h-8 bg-purple-100 rounded flex items-center justify-center">📊</div>
+            </div>
+            <div className="space-y-1">
+              <div className="w-full h-1.5 bg-gray-100 rounded"></div>
+              <div className="w-2/3 h-1.5 bg-gray-100 rounded"></div>
+            </div>
+          </div>
+        </div>
+
+        {/* Floating geometric elements */}
+        <div className="absolute top-32 left-20 w-6 h-6 bg-blue-400/30 rounded rotate-45"></div>
+        <div className="absolute top-72 left-32 w-4 h-4 bg-orange-400/30 rounded-full"></div>
+        <div className="absolute bottom-48 left-24 w-5 h-5 bg-teal-400/30 rounded rotate-12"></div>
+        <div className="absolute top-56 left-1/3 w-3 h-3 bg-purple-400/30 rounded-full"></div>
+
+        {/* Connecting flow lines */}
+        <svg className="absolute inset-0 w-full h-full opacity-30" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-              <circle cx="20" cy="20" r="1" fill="#94a3b8"/>
-            </pattern>
+            <linearGradient id="flowGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#3b82f6" stopOpacity="0"/>
+              <stop offset="50%" stopColor="#3b82f6" stopOpacity="0.4"/>
+              <stop offset="100%" stopColor="#3b82f6" stopOpacity="0"/>
+            </linearGradient>
+            <linearGradient id="flowGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#06b6d4" stopOpacity="0"/>
+              <stop offset="50%" stopColor="#06b6d4" stopOpacity="0.3"/>
+              <stop offset="100%" stopColor="#06b6d4" stopOpacity="0"/>
+            </linearGradient>
           </defs>
-          <rect width="100%" height="100%" fill="url(#dots)"/>
-          <path d="M100,200 Q200,100 400,200 T800,200" stroke="#e2e8f0" strokeWidth="1" fill="none"/>
-          <path d="M200,400 Q400,300 600,400 T1000,400" stroke="#e2e8f0" strokeWidth="1" fill="none"/>
-          <path d="M50,300 Q250,200 450,300 T850,300" stroke="#e2e8f0" strokeWidth="1" fill="none"/>
+          
+          {/* Curved connecting lines between interface elements */}
+          <path d="M120,160 Q300,120 480,180 Q660,240 800,200" stroke="url(#flowGradient1)" strokeWidth="2" fill="none" strokeDasharray="5,5"/>
+          <path d="M160,280 Q350,320 540,300 Q720,280 900,320" stroke="url(#flowGradient2)" strokeWidth="2" fill="none" strokeDasharray="3,7"/>
+          <path d="M80,380 Q250,340 420,380 Q590,420 750,400" stroke="url(#flowGradient1)" strokeWidth="1.5" fill="none" strokeDasharray="8,4"/>
+          
+          {/* Dotted connection points */}
+          <circle cx="150" cy="200" r="2" fill="#3b82f6" opacity="0.4"/>
+          <circle cx="320" cy="250" r="2" fill="#06b6d4" opacity="0.4"/>
+          <circle cx="520" cy="320" r="2" fill="#8b5cf6" opacity="0.4"/>
+          <circle cx="720" cy="280" r="2" fill="#f59e0b" opacity="0.4"/>
         </svg>
       </div>
 
