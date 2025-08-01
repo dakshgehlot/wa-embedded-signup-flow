@@ -1083,7 +1083,7 @@ const Index = () => {
                   }}>✕</div>
                         <p style={{
                     color: '#666',
-                    fontSize: '16px'
+                    fontSize: '18px'
                   }}>The registration process was interrupted. Please try again to complete your WhatsApp sender registration.</p>
                       </div>
                       <div className="modal-actions">
