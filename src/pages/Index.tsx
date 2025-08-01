@@ -1005,7 +1005,8 @@ const Index = () => {
                   {/* Step 6: Success state */}
                   {modalStep === 6 && <>
                       <div className="modal-title" style={{
-                  color: '#000000'
+                  color: '#000000',
+                  textAlign: 'center'
                 }}>WhatsApp registration completed successfully!</div>
                       <div style={{
                   textAlign: 'center',
