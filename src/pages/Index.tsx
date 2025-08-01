@@ -481,6 +481,7 @@ const Index = () => {
           font-weight: 700;
           margin-bottom: 8px;
           color: #000000;
+          text-align: center;
         }
         .modal-desc {
           color: #444;
