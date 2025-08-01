@@ -539,11 +539,11 @@ const Index = () => {
           background: #fff7e0;
           border: 1px solid #ffe6b3;
           border-radius: 8px;
-          padding: 18px 20px;
-          margin-bottom: 18px;
+          padding: 20px 24px;
+          margin-bottom: 24px;
           display: flex;
           align-items: flex-start;
-          gap: 12px;
+          gap: 16px;
         }
         .migration-warning-icon {
           color: #ffb300;
@@ -551,15 +551,15 @@ const Index = () => {
           margin-top: 2px;
         }
         .migration-section {
-          margin-bottom: 18px;
+          margin-bottom: 24px;
         }
         .migration-section-title {
           font-weight: 600;
           font-size: 16px;
-          margin-bottom: 4px;
+          margin-bottom: 12px;
           display: flex;
           align-items: center;
-          gap: 6px;
+          gap: 10px;
         }
         .migration-icon {
           width: 20px;
@@ -587,17 +587,22 @@ const Index = () => {
           font-size: 18px;
         }
         .migration-list {
-          margin: 0 0 0 18px;
+          margin: 0 0 0 30px;
           padding: 0;
           color: #444;
           font-size: 15px;
+          line-height: 1.6;
+        }
+        .migration-list li {
+          margin-bottom: 8px;
         }
         .migration-checkbox {
           display: flex;
           align-items: flex-start;
-          gap: 8px;
-          margin-bottom: 10px;
+          gap: 12px;
+          margin-bottom: 16px;
           font-size: 15px;
+          line-height: 1.5;
         }
         .migration-checkbox input[type='checkbox'] {
           accent-color: #143F93;
@@ -708,11 +713,11 @@ const Index = () => {
           }}>
                 <div className="custom-modal-animate" style={{
               background: '#fff',
-              borderRadius: 8,
-              padding: 32,
-              minWidth: 480,
-              maxWidth: 560,
-              boxShadow: '0 2px 16px rgba(0,0,0,0.15)',
+              borderRadius: 12,
+              padding: '40px',
+              minWidth: 520,
+              maxWidth: 600,
+              boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
               textAlign: 'left',
               position: 'relative'
             }}>
