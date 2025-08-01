@@ -1021,7 +1021,7 @@ const Index = () => {
                     alignItems: 'center',
                     justifyContent: 'center',
                     margin: '0 auto 20px',
-                    fontSize: '40px',
+                    fontSize: '60px',
                     color: 'white',
                     animation: 'bounce 1s ease-in-out'
                   }}>✓</div>
