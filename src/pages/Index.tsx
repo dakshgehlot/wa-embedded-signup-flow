@@ -676,7 +676,7 @@ const Index = () => {
       `}</style>
       {/* Welcome Section */}
       <div className="flex justify-center items-center min-h-[60vh] px-6">
-        <div className="bg-white rounded-lg p-8 max-w-md w-full text-center">
+        <div className="bg-white rounded-lg p-8 max-w-md w-full text-center px-[60px] py-[60px] my-[60px] mx-[60px]">
           <h1 className="text-2xl font-semibold text-black mb-4">
             👋 Welcome to Netcore Cloud!
           </h1>
@@ -742,22 +742,20 @@ const Index = () => {
                       <div className="modal-title">Register a WhatsApp sender</div>
                       <div className="modal-desc">To connect WhatsApp with <b>Netcore Cloud</b>, you'll need a phone number. Choose one of the options below to get started.</div>
                       <div className="option-card" onClick={handleConnectOutsideInfobip}>
-                        <Link 
-                          size={28} 
-                          color="#ff6d00" 
-                          style={{ marginTop: '2px', flexShrink: 0 }}
-                        />
+                        <Link size={28} color="#ff6d00" style={{
+                    marginTop: '2px',
+                    flexShrink: 0
+                  }} />
                         <div className="option-content">
                           <div className="option-title">Connect a number you have outside of Netcore Cloud</div>
                           <div className="option-desc">You will need to delete any existing WhatsApp accounts connected to the number. Verification with SMS or phone call required.</div>
                         </div>
                       </div>
                       <div className="option-card" onClick={handleMigrateNumber}>
-                        <ArrowRightLeft 
-                          size={28} 
-                          color="#ff6d00" 
-                          style={{ marginTop: '2px', flexShrink: 0 }}
-                        />
+                        <ArrowRightLeft size={28} color="#ff6d00" style={{
+                    marginTop: '2px',
+                    flexShrink: 0
+                  }} />
                         <div className="option-content">
                           <div className="option-title">Migrate a number from another WhatsApp solution provider or another WhatsApp Business Account</div>
                           <div className="option-desc">Use this option to transfer the number from another solution provider or an existing WhatsApp Business Account (WABA) set up on Netcore Cloud.</div>
