@@ -1050,7 +1050,7 @@ const Index = () => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    margin: '0 auto 20px',
+                    margin: '0 auto',
                     fontSize: '60px',
                     color: 'white',
                     animation: 'bounce 1s ease-in-out'
