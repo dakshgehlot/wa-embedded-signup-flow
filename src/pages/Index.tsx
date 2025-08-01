@@ -648,33 +648,50 @@ const Index = () => {
           75% { transform: translateX(5px); }
         }
       `}</style>
-      {/* Welcome Section */}
-      <div className="border-b border-gray-200 py-0 px-0 my-0 mx-[30px] rounded-md bg-white">
-        <div className="mx-6 py-6 mt-8">
-          <div className="flex items-center justify-between">
-            <div className="flex-1">
-              <h1 className="text-2xl font-semibold text-black mb-2">
-                👋 Welcome to Netcore Cloud!
-              </h1>
-              <p className="text-gray-600">
-                Let's set up your WhatsApp Business sender so you can start sending messages.
-              </p>
+      {/* Main Content */}
+      <div className="min-h-screen bg-gray-50">
+        {/* Welcome Section */}
+        <div className="bg-white">
+          <div className="max-w-7xl mx-auto px-6 py-12">
+            <div className="flex items-center justify-between">
+              <div className="flex-1">
+                <h1 className="text-3xl font-bold text-gray-900 mb-3">
+                  👋 Welcome to Netcore Cloud!
+                </h1>
+                <p className="text-lg text-gray-600 max-w-2xl">
+                  Let's set up your WhatsApp Business sender so you can start sending messages.
+                </p>
+              </div>
+              <div className="flex items-center gap-4">
+                <button 
+                  onClick={downloadLogs} 
+                  className="px-6 py-3 text-[#143F93] bg-gray-50 border border-gray-200 rounded-lg font-medium hover:bg-gray-100 transition-colors"
+                >
+                  Download logs
+                </button>
+                <button 
+                  onClick={openRegisterModal} 
+                  className="px-6 py-3 bg-[#143F93] text-white rounded-lg font-medium hover:bg-[#0f3578] transition-colors"
+                >
+                  Get started
+                </button>
+              </div>
             </div>
-            <div className="flex items-center gap-4">
-              <Button onClick={downloadLogs} variant="default" className="py-[24px] px-[16px] bg-neutral-50 text-[143F93] text-[#143f93]">Download logs</Button>
-              <button onClick={openRegisterModal} className="bg-[#143F93] text-white rounded-lg font-medium hover:bg-[#0f3578] transition-colors whitespace-nowrap py-[12px] px-[24px]">
-                Get started
-              </button>
+          </div>
+        </div>
+        
+        {/* Content Area */}
+        <div className="max-w-7xl mx-auto px-6 py-8">
+          <div className="text-center">
+            <div className="inline-block bg-white rounded-xl shadow-sm border border-gray-200 p-8">
+              <div className="max-w-md mx-auto">
+                <h2 className="text-xl font-semibold text-gray-900 mb-2">Ready to Get Started?</h2>
+                <p className="text-gray-600 mb-6">Click the "Get started" button above to begin setting up your WhatsApp Business integration.</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
-      <div className="min-h-screen flex items-center justify-center" style={{
-      background: '#F4F8FF'
-    }}>
-        <div className="w-full max-w-md px-6">
-          <div className="bg-card rounded-lg shadow-[var(--shadow-soft)] p-8 text-center px-0 py-0">
             {/* Modal Popup */}
             {showModal && <div style={{
             position: 'fixed',
@@ -1180,11 +1197,9 @@ const Index = () => {
                       </div>
                     </>}
 
-                </div>
-              </div>}
-          </div>
-        </div>
-      </div>
+                 </div>
+               </div>}
+               
       {/* Snackbar */}
       {showSnackbar && <div style={{
       position: 'fixed',
