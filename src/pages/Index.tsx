@@ -594,9 +594,10 @@ const Index = () => {
           color: #444;
           font-size: 15px;
           line-height: 1.6;
+          list-style-type: disc;
         }
         .migration-list li {
-          margin-bottom: 8px;
+          margin-bottom: 4px;
         }
         .migration-checkbox {
           display: flex;
