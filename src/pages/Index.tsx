@@ -676,7 +676,7 @@ const Index = () => {
       `}</style>
       {/* Welcome Section */}
       <div className="flex justify-center items-center min-h-[60vh] px-6">
-        <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full text-center">
+        <div className="bg-white rounded-lg p-8 max-w-md w-full text-center">
           <h1 className="text-2xl font-semibold text-black mb-4">
             👋 Welcome to Netcore Cloud!
           </h1>
