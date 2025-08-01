@@ -424,17 +424,11 @@ const Index = () => {
   };
   return <>
       {/* Header with Netcore logo */}
-      <section className="w-full py-8">
-        <div className="flex justify-center items-center">
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <span className="text-4xl">👋</span>
-              <h1 className="text-3xl font-bold text-gray-900">Welcome to Netcore Cloud!</h1>
-            </div>
-            <p className="text-lg text-gray-600">Let's set up your WhatsApp Business sender so you can start sending messages.</p>
-          </div>
+      <header className="w-full bg-white border-b border-gray-200 px-6 py-4">
+        <div className="flex items-center">
+          <img src="/netcore-logo.svg" alt="Netcore" className="h-8" />
         </div>
-      </section>
+      </header>
 
       <style>{`
         @keyframes modalFadeIn {
