@@ -913,14 +913,14 @@ const Index = () => {
                     </>}
                   {/* Step 5: Loading state */}
                   {modalStep === 5 && <>
-                      <div className="modal-title">Registering with Meta and Netcore Cloud...</div>
+                      <div className="modal-title">Completing registration with Meta...</div>
                       <div style={{
                   textAlign: 'center',
                   padding: '40px 0'
                 }}>
                         <div style={{
-                    width: '40px',
-                    height: '40px',
+                    width: '60px',
+                    height: '60px',
                     border: '4px solid #f3f3f3',
                     borderTop: '4px solid #143F93',
                     borderRadius: '50%',
@@ -930,14 +930,14 @@ const Index = () => {
                         <div style={{
                     color: '#666',
                     fontSize: '16px',
-                    textAlign: 'left',
+                    textAlign: 'center',
                     maxWidth: '400px',
                     margin: '0 auto'
                   }}>
                           {loadingStep === 0 && <div style={{
                       display: 'flex',
                       alignItems: 'center',
-                      justifyContent: 'flex-start',
+                      justifyContent: 'center',
                       marginBottom: '8px',
                       animation: 'fadeInUp 0.5s ease-out'
                     }}>
@@ -950,7 +950,7 @@ const Index = () => {
                           {loadingStep === 1 && <div style={{
                       display: 'flex',
                       alignItems: 'center',
-                      justifyContent: 'flex-start',
+                      justifyContent: 'center',
                       marginBottom: '8px',
                       animation: 'fadeInUp 0.5s ease-out'
                     }}>
@@ -963,7 +963,7 @@ const Index = () => {
                           {loadingStep === 2 && <div style={{
                       display: 'flex',
                       alignItems: 'center',
-                      justifyContent: 'flex-start',
+                      justifyContent: 'center',
                       marginBottom: '8px',
                       animation: 'fadeInUp 0.5s ease-out'
                     }}>
@@ -976,7 +976,7 @@ const Index = () => {
                           {loadingStep === 3 && <div style={{
                       display: 'flex',
                       alignItems: 'center',
-                      justifyContent: 'flex-start',
+                      justifyContent: 'center',
                       marginBottom: '8px',
                       animation: 'fadeInUp 0.5s ease-out'
                     }}>
@@ -989,7 +989,7 @@ const Index = () => {
                           {loadingStep === 4 && <div style={{
                       display: 'flex',
                       alignItems: 'center',
-                      justifyContent: 'flex-start',
+                      justifyContent: 'center',
                       marginBottom: '8px',
                       animation: 'fadeInUp 0.5s ease-out'
                     }}>
