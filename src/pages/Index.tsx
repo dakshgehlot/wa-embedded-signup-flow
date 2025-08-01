@@ -1061,7 +1061,8 @@ const Index = () => {
                   {/* Step 7: Error state */}
                   {modalStep === 7 && <>
                       <div className="modal-title" style={{
-                  color: '#000000'
+                  color: '#000000',
+                  textAlign: 'center'
                 }}>Registration interrupted!</div>
                       <div style={{
                   textAlign: 'center',
