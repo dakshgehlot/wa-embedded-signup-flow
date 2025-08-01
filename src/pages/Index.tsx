@@ -692,8 +692,8 @@ const Index = () => {
               background: '#fff',
               borderRadius: 8,
               padding: 32,
-              minWidth: 480,
-              maxWidth: 560,
+              minWidth: 600,
+              maxWidth: 800,
               boxShadow: '0 2px 16px rgba(0,0,0,0.15)',
               textAlign: 'left',
               position: 'relative'
