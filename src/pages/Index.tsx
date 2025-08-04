@@ -1068,7 +1068,7 @@ const Index = () => {
                     animation: 'bounce 1s ease-in-out'
                   }}>✓</div>
                       </div>
-                      <div className="modal-actions" style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                      <div className="modal-actions" style={{ display: 'flex', justifyContent: 'flex-end' }}>
                          <button onClick={() => setModalStep(8)} style={{
                     backgroundColor: '#143F93',
                     border: 0,
