@@ -433,7 +433,7 @@ const Index = () => {
       </div>
 
       {/* Header with Netcore logo */}
-      <header className="relative w-full bg-white/90 backdrop-blur-sm border-b border-gray-200 px-6 py-4">
+      <header className="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-sm border-b border-gray-200 px-6 py-4">
         <div className="flex items-center">
           <img src="/netcore-logo.svg" alt="Netcore" className="h-8" />
         </div>
