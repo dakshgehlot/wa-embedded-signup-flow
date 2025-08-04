@@ -549,7 +549,6 @@ const Index = () => {
         
         .option-card:hover:not(.disabled) {
           border-color: #ff6d00;
-          box-shadow: 0 8px 25px -8px rgba(255, 109, 0, 0.3);
           transform: translateY(-2px);
         }
         
