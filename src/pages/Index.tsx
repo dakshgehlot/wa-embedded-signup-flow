@@ -1130,7 +1130,7 @@ const Index = () => {
                     height: '40px',
                     padding: '0 24px'
                   }}>
-                          Try <span style={{ fontSize: '12px' }}>a</span>gain
+                          Try again
                         </button>
                       </div>
                     </>}
