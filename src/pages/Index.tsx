@@ -441,87 +441,209 @@ const Index = () => {
 
       <style>{`
         @keyframes modalFadeIn {
-          0% { opacity: 0; transform: scale(0.9); }
-          100% { opacity: 1; transform: scale(1); }
+          0% { 
+            opacity: 0; 
+            transform: scale(0.95) translateY(-20px); 
+          }
+          100% { 
+            opacity: 1; 
+            transform: scale(1) translateY(0); 
+          }
         }
+        
+        @keyframes overlayFadeIn {
+          0% { opacity: 0; }
+          100% { opacity: 1; }
+        }
+        
+        .modal-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          background: rgba(0, 0, 0, 0.6);
+          backdrop-filter: blur(8px);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 1000;
+          animation: overlayFadeIn 0.3s ease-out;
+        }
+        
         .custom-modal-animate {
-          animation: modalFadeIn 0.35s cubic-bezier(0.4,0,0.2,1);
+          background: #ffffff;
+          border-radius: 16px;
+          padding: 0;
+          min-width: 520px;
+          max-width: 600px;
           max-height: 90vh;
           overflow-y: auto;
+          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 
+                      0 0 0 1px rgba(0, 0, 0, 0.05);
+          text-align: left;
+          position: relative;
+          animation: modalFadeIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        .option-card {
-          border: 1px solid #e5e7eb;
+        
+        .modal-header {
+          padding: 32px 40px 0 40px;
+          border-bottom: 1px solid #f1f5f9;
+          margin-bottom: 32px;
+        }
+        
+        .modal-body {
+          padding: 0 40px 32px 40px;
+        }
+        
+        .modal-close {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          background: #f8fafc;
+          border: none;
           border-radius: 8px;
-          padding: 20px 24px;
-          margin-bottom: 18px;
+          width: 32px;
+          height: 32px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 18px;
+          color: #64748b;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+        
+        .modal-close:hover {
+          background: #e2e8f0;
+          color: #475569;
+          transform: scale(1.05);
+        }
+        
+        .option-card {
+          border: 1px solid #e2e8f0;
+          border-radius: 12px;
+          padding: 24px;
+          margin-bottom: 16px;
           display: flex;
           align-items: flex-start;
           gap: 16px;
-          background: #fff;
+          background: #ffffff;
           cursor: pointer;
-          transition: box-shadow 0.15s;
+          transition: all 0.2s ease;
+          position: relative;
+          overflow: hidden;
         }
+        
+        .option-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(135deg, rgba(255, 109, 0, 0.05), rgba(20, 63, 147, 0.05));
+          opacity: 0;
+          transition: opacity 0.2s ease;
+        }
+        
         .option-card:hover:not(.disabled) {
-          box-shadow: 0 2px 8px rgba(255,109,0,0.13);
+          border-color: #ff6d00;
+          box-shadow: 0 8px 25px -8px rgba(255, 109, 0, 0.3);
+          transform: translateY(-2px);
         }
+        
+        .option-card:hover:not(.disabled)::before {
+          opacity: 1;
+        }
+        
         .option-card.disabled {
           opacity: 0.5;
           cursor: not-allowed;
         }
+        
         .option-icon {
           font-size: 28px;
           margin-top: 2px;
+          z-index: 1;
+          position: relative;
         }
+        
         .option-content {
           flex: 1;
+          z-index: 1;
+          position: relative;
         }
+        
         .option-title {
           font-weight: 600;
           font-size: 17px;
-          margin-bottom: 2px;
-          color: #212121;
-        }
-        .option-desc {
-          color: #555;
-          font-size: 15px;
-        }
-        .modal-title {
-          font-size: 24px;
-          font-weight: 700;
           margin-bottom: 8px;
-          color: #000000;
+          color: #1e293b;
+          line-height: 1.4;
+        }
+        
+        .option-desc {
+          color: #64748b;
+          font-size: 15px;
+          line-height: 1.5;
+        }
+        
+        .modal-title {
+          font-size: 28px;
+          font-weight: 700;
+          margin-bottom: 12px;
+          color: #0f172a;
           text-align: center;
+          line-height: 1.2;
         }
+        
         .modal-desc {
-          color: #444;
+          color: #475569;
           font-size: 16px;
-          margin-bottom: 24px;
+          margin-bottom: 32px;
+          text-align: center;
+          line-height: 1.6;
         }
+        
         .modal-actions {
           display: flex;
           justify-content: flex-end;
-          gap: 24px;
-          margin-top: 18px;
+          gap: 16px;
+          margin-top: 32px;
+          padding-top: 24px;
+          border-top: 1px solid #f1f5f9;
         }
+        
         .modal-link-btn {
-          color: #143F93;
-          background: none;
-          border: 1px solid #143F93;
+          color: #64748b;
+          background: #f8fafc;
+          border: 1px solid #e2e8f0;
           font-weight: 500;
           font-size: 16px;
           cursor: pointer;
           text-decoration: none;
-          padding: 8px 16px;
-          border-radius: 4px;
+          padding: 12px 24px;
+          border-radius: 8px;
           transition: all 0.2s ease;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+        
+        .modal-link-btn:hover {
+          background: #e2e8f0;
+          border-color: #cbd5e1;
+          color: #475569;
+          transform: translateY(-1px);
         }
         
         /* Custom checkbox styles */
         .custom-checkbox {
-          width: 18px;
-          height: 18px;
-          border: 2px solid #143F93;
-          border-radius: 3px;
+          width: 20px;
+          height: 20px;
+          border: 2px solid #e2e8f0;
+          border-radius: 6px;
           background: white;
           cursor: pointer;
           display: flex;
@@ -540,39 +662,53 @@ const Index = () => {
           font-size: 12px;
           font-weight: bold;
         }
-        .modal-link-btn:hover {
-          background-color: #143F93;
-          color: white;
-        }
+        
         .migration-warning {
-          background: #fff7e0;
-          border: 1px solid #ffe6b3;
-          border-radius: 8px;
-          padding: 20px 24px;
+          background: linear-gradient(135deg, #fef3cd, #fde68a);
+          border: 1px solid #f59e0b;
+          border-radius: 12px;
+          padding: 24px;
           margin-bottom: 24px;
           display: flex;
           align-items: flex-start;
           gap: 16px;
+          position: relative;
+          overflow: hidden;
         }
+        
+        .migration-warning::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 4px;
+          height: 100%;
+          background: #f59e0b;
+        }
+        
         .migration-warning-icon {
-          color: #ffb300;
-          font-size: 22px;
+          color: #d97706;
+          font-size: 24px;
           margin-top: 2px;
         }
+        
         .migration-section {
-          margin-bottom: 24px;
+          margin-bottom: 28px;
         }
+        
         .migration-section-title {
           font-weight: 600;
           font-size: 16px;
-          margin-bottom: 12px;
+          margin-bottom: 16px;
           display: flex;
           align-items: center;
-          gap: 10px;
+          gap: 12px;
+          color: #1e293b;
         }
+        
         .migration-icon {
-          width: 20px;
-          height: 20px;
+          width: 24px;
+          height: 24px;
           border-radius: 50%;
           display: inline-flex;
           align-items: center;
@@ -581,87 +717,102 @@ const Index = () => {
           font-weight: bold;
           color: white;
         }
+        
         .migration-icon-success {
-          background-color: rgba(46, 125, 50, 0.15);
-          color: #2e7d32;
+          background: linear-gradient(135deg, #10b981, #059669);
         }
+        
         .migration-icon-error {
-          background-color: rgba(211, 47, 47, 0.15);
-          color: #d32f2f;
+          background: linear-gradient(135deg, #ef4444, #dc2626);
         }
-        .migration-section-title .check {
-          color: #2e7d32;
-          font-size: 18px;
-        }
-        .migration-section-title .warn {
-          color: #ffb300;
-          font-size: 18px;
-        }
+        
         .migration-list {
-          margin: 0 0 0 30px;
+          margin: 0 0 0 36px;
           padding: 0;
-          color: #444;
+          color: #475569;
           font-size: 15px;
-          line-height: 1.6;
-          list-style-type: disc;
+          line-height: 1.7;
+          list-style-type: none;
         }
+        
         .migration-list li {
-          margin-bottom: 4px;
+          margin-bottom: 8px;
+          position: relative;
+          padding-left: 20px;
         }
+        
+        .migration-list li::before {
+          content: '•';
+          position: absolute;
+          left: 0;
+          color: #94a3b8;
+          font-weight: bold;
+        }
+        
         .migration-checkbox {
           display: flex;
           align-items: flex-start;
           gap: 12px;
-          margin-bottom: 16px;
+          margin-bottom: 20px;
           font-size: 15px;
-          line-height: 1.5;
+          line-height: 1.6;
+          color: #374151;
         }
+        
         .migration-checkbox input[type='checkbox'] {
           accent-color: #143F93;
           width: 18px;
           height: 18px;
-          border: 2px solid #143F93;
-        }
-        .migration-actions {
-          display: flex;
-          justify-content: flex-end;
-          gap: 18px;
-          margin-top: 24px;
-          border-top: 1px solid #eee;
-          padding-top: 18px;
-        }
-        .migration-login-btn {
-          background-color: #143F93;
-          border: 0;
+          border: 2px solid #d1d5db;
           border-radius: 4px;
+        }
+        
+        .migration-login-btn {
+          background: linear-gradient(135deg, #143F93, #1e40af);
+          border: 0;
+          border-radius: 8px;
           color: #fff;
           cursor: pointer;
-          font-family: Helvetica, Arial, sans-serif;
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
           font-size: 16px;
-          font-weight: 500;
-          height: 40px;
-          padding: 0 24px;
+          font-weight: 600;
+          height: 48px;
+          padding: 0 32px;
           display: flex;
           align-items: center;
-          gap: 8px;
+          gap: 12px;
           min-width: 200px;
           justify-content: center;
+          transition: all 0.2s ease;
+          box-shadow: 0 4px 14px 0 rgba(20, 63, 147, 0.25);
         }
+        
+        .migration-login-btn:hover:not(:disabled) {
+          background: linear-gradient(135deg, #1e40af, #1d4ed8);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px 0 rgba(20, 63, 147, 0.35);
+        }
+        
         .migration-login-btn:disabled {
-          background: #e4e6eb;
-          color: #bdbdbd;
+          background: #e5e7eb;
+          color: #9ca3af;
           cursor: not-allowed;
           opacity: 1;
+          transform: none;
+          box-shadow: none;
         }
+        
         .migration-login-btn.loading {
-          background: #e4e6eb;
-          color: #bdbdbd;
+          background: #e5e7eb;
+          color: #9ca3af;
           cursor: not-allowed;
         }
+        
         @keyframes spin {
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
         }
+        
         @keyframes fadeInUp {
           0% { 
             opacity: 0; 
@@ -672,15 +823,107 @@ const Index = () => {
             transform: translateY(0); 
           }
         }
+        
         @keyframes bounce {
           0%, 20%, 50%, 80%, 100% { transform: scale(1); }
           40% { transform: scale(1.1); }
           60% { transform: scale(1.05); }
         }
+        
         @keyframes shake {
           0%, 100% { transform: translateX(0); }
           25% { transform: translateX(-5px); }
           75% { transform: translateX(5px); }
+        }
+        
+        .loading-spinner {
+          width: 80px;
+          height: 80px;
+          border: 4px solid #f1f5f9;
+          border-top: 4px solid #143F93;
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
+          margin: 0 auto 24px;
+        }
+        
+        .success-icon {
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #10b981, #059669);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 auto 24px;
+          font-size: 60px;
+          color: white;
+          animation: bounce 1s ease-in-out;
+          box-shadow: 0 20px 40px -12px rgba(16, 185, 129, 0.4);
+        }
+        
+        .error-icon {
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #ef4444, #dc2626);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 auto 24px;
+          font-size: 40px;
+          color: white;
+          animation: shake 0.5s ease-in-out;
+          box-shadow: 0 20px 40px -12px rgba(239, 68, 68, 0.4);
+        }
+        
+        .primary-button {
+          background: linear-gradient(135deg, #143F93, #1e40af);
+          border: 0;
+          border-radius: 8px;
+          color: #fff;
+          cursor: pointer;
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+          font-size: 16px;
+          font-weight: 600;
+          height: 48px;
+          padding: 0 32px;
+          transition: all 0.2s ease;
+          box-shadow: 0 4px 14px 0 rgba(20, 63, 147, 0.25);
+        }
+        
+        .primary-button:hover {
+          background: linear-gradient(135deg, #1e40af, #1d4ed8);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px 0 rgba(20, 63, 147, 0.35);
+        }
+        
+        .form-input {
+          width: 100%;
+          padding: 16px;
+          border: 2px solid #e2e8f0;
+          border-radius: 8px;
+          font-size: 16px;
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+          transition: all 0.2s ease;
+          background: #ffffff;
+        }
+        
+        .form-input:focus {
+          outline: none;
+          border-color: #143F93;
+          box-shadow: 0 0 0 3px rgba(20, 63, 147, 0.1);
+        }
+        
+        .form-label {
+          display: block;
+          margin-bottom: 8px;
+          font-weight: 600;
+          color: #1e293b;
+          font-size: 16px;
+        }
+        
+        .form-group {
+          margin-bottom: 24px;
         }
       `}</style>
       {/* Welcome Section */}
@@ -709,46 +952,26 @@ const Index = () => {
         <div className="w-full max-w-md px-6">
           <div className="bg-card rounded-lg shadow-[var(--shadow-soft)] p-8 text-center px-0 py-0">
             {/* Modal Popup */}
-            {showModal && <div style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100vw',
-            height: '100vh',
-            background: 'rgba(33,33,33,0.18)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 1000
-          }}>
-                <div className="custom-modal-animate" style={{
-              background: '#fff',
-              borderRadius: 12,
-              padding: '40px',
-              minWidth: 520,
-              maxWidth: 600,
-              boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
-              textAlign: 'left',
-              position: 'relative'
-            }}>
-                  {/* Close button */}
-                  <button onClick={() => {
-                setShowModal(false);
-                setModalStep(null);
-              }} style={{
-                position: 'absolute',
-                top: 18,
-                right: 18,
-                background: 'none',
-                border: 'none',
-                fontSize: 22,
-                color: '#000000',
-                cursor: 'pointer'
-              }} aria-label="Close">×</button>
-
-                  {/* Step 2: Connect number options */}
-                  {modalStep === 2 && <>
-                      <div className="modal-title">Register a WhatsApp sender</div>
+            {showModal && <div className="modal-overlay">
+                <div className="custom-modal-animate">
+                  <div className="modal-header">
+                    {/* Close button */}
+                    <button 
+                      onClick={() => {
+                        setShowModal(false);
+                        setModalStep(null);
+                      }} 
+                      className="modal-close"
+                      aria-label="Close"
+                    >
+                      ×
+                    </button>
+                  </div>
+                  
+                  <div className="modal-body">
+                    {/* Step 2: Connect number options */}
+                    {modalStep === 2 && <>
+                        <div className="modal-title">Register a WhatsApp sender</div>
                       <div className="modal-desc">To connect WhatsApp with <b>Netcore Cloud</b>, you'll need a phone number. Choose one of the options below to get started.</div>
                       <div className="option-card" onClick={handleConnectOutsideInfobip}>
                         <Link size={28} color="#ff6d00" style={{
@@ -949,15 +1172,7 @@ const Index = () => {
                   textAlign: 'center',
                   padding: '40px 0'
                 }}>
-                        <div style={{
-                    width: '60px',
-                    height: '60px',
-                    border: '4px solid #f3f3f3',
-                    borderTop: '4px solid #143F93',
-                    borderRadius: '50%',
-                    animation: 'spin 1s linear infinite',
-                    margin: '0 auto 20px'
-                  }} className="mx-0 my-[5px]"></div>
+                        <div className="loading-spinner"></div>
                         <div style={{
                     color: '#666',
                     fontSize: '16px',
@@ -1054,33 +1269,10 @@ const Index = () => {
                   textAlign: 'center',
                   padding: '40px 0'
                 }}>
-                        <div style={{
-                    width: '80px',
-                    height: '80px',
-                    borderRadius: '50%',
-                    background: '#2e7d32',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    margin: '0 auto 20px',
-                    fontSize: '60px',
-                    color: 'white',
-                    animation: 'bounce 1s ease-in-out'
-                  }}>✓</div>
+                        <div className="success-icon">✓</div>
                       </div>
                       <div className="modal-actions" style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                         <button onClick={() => setModalStep(8)} style={{
-                    backgroundColor: '#143F93',
-                    border: 0,
-                    borderRadius: '4px',
-                    color: '#fff',
-                    cursor: 'pointer',
-                    fontFamily: 'Helvetica, Arial, sans-serif',
-                    fontSize: '16px',
-                    fontWeight: '500',
-                    height: '40px',
-                    padding: '0 24px'
-                  }}>
+                         <button onClick={() => setModalStep(8)} className="primary-button">
                           Send test message
                         </button>
                       </div>
@@ -1095,37 +1287,14 @@ const Index = () => {
                   textAlign: 'center',
                   padding: '40px 0'
                 }}>
-                        <div style={{
-                    width: '80px',
-                    height: '80px',
-                    borderRadius: '50%',
-                    background: '#d32f2f',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    margin: '0 auto 20px',
-                    fontSize: '40px',
-                    color: 'white',
-                    animation: 'shake 0.5s ease-in-out'
-                  }}>✕</div>
+                        <div className="error-icon">✕</div>
                         <p style={{
                     color: '#666',
                     fontSize: '16px'
                   }}>The registration process was interrupted. Please try again to complete your WhatsApp sender registration.</p>
                       </div>
                       <div className="modal-actions" style={{ display: 'flex', justifyContent: 'center' }}>
-                         <button onClick={handleTryAgain} style={{
-                    backgroundColor: '#143F93',
-                    border: 0,
-                    borderRadius: '4px',
-                    color: '#fff',
-                    cursor: 'pointer',
-                    fontFamily: 'Helvetica, Arial, sans-serif',
-                    fontSize: '16px',
-                    fontWeight: '500',
-                    height: '40px',
-                    padding: '0 24px'
-                  }}>
+                         <button onClick={handleTryAgain} className="primary-button">
                           Try again
                         </button>
                       </div>
@@ -1136,56 +1305,42 @@ const Index = () => {
                       <div className="modal-desc">
                         If you wish to send a test message to yourself, you can do it here.
                       </div>
-                      <div style={{
-                  marginBottom: 20
-                }}>
-                        <label style={{
-                    display: 'block',
-                    marginBottom: 8,
-                    fontWeight: 'bold',
-                    color: '#333'
-                  }}>
+                      <div className="form-group">
+                        <label className="form-label">
                           Recipient WhatsApp Number:
                         </label>
-                        <input type="text" placeholder="911234567890" value={testMessage.recipient} onChange={e => setTestMessage(prev => ({
-                    ...prev,
-                    recipient: e.target.value
-                  }))} style={{
-                    width: '100%',
-                    padding: '12px',
-                    border: '1px solid #ddd',
-                    borderRadius: '4px',
-                    fontSize: '16px',
-                    fontFamily: 'Helvetica, Arial, sans-serif'
-                  }} />
+                        <input 
+                          type="text" 
+                          placeholder="911234567890" 
+                          value={testMessage.recipient} 
+                          onChange={e => setTestMessage(prev => ({
+                            ...prev,
+                            recipient: e.target.value
+                          }))} 
+                          className="form-input"
+                        />
                       </div>
-                      <div style={{
-                  marginBottom: 20
-                }}>
-                        <label style={{
-                    display: 'block',
-                    marginBottom: 8,
-                    fontWeight: 'bold',
-                    color: '#333'
-                  }}>
+                      <div className="form-group">
+                        <label className="form-label">
                           Message Body:
                         </label>
-                        <textarea placeholder="Enter your test message here..." value={testMessage.body} onChange={e => setTestMessage(prev => ({
-                    ...prev,
-                    body: e.target.value
-                  }))} readOnly style={{
-                    width: '100%',
-                    padding: '12px',
-                    border: '1px solid #ddd',
-                    borderRadius: '4px',
-                    fontSize: '16px',
-                    fontFamily: 'Helvetica, Arial, sans-serif',
-                    minHeight: '100px',
-                    resize: 'none',
-                    backgroundColor: '#f5f5f5',
-                    color: '#666',
-                    cursor: 'not-allowed'
-                  }} />
+                        <textarea 
+                          placeholder="Enter your test message here..." 
+                          value={testMessage.body} 
+                          onChange={e => setTestMessage(prev => ({
+                            ...prev,
+                            body: e.target.value
+                          }))} 
+                          readOnly 
+                          className="form-input"
+                          style={{
+                            minHeight: '100px',
+                            resize: 'none',
+                            backgroundColor: '#f8fafc',
+                            color: '#64748b',
+                            cursor: 'not-allowed'
+                          }}
+                        />
                       </div>
                       <div className="modal-actions">
                         <button className="modal-link-btn" onClick={() => {
@@ -1196,23 +1351,20 @@ const Index = () => {
                       body: 'Welcome to Netcore Cloud! This is a test message to verify your WhatsApp sender registration. Thank you for choosing Netcore Cloud for your messaging needs.'
                     });
                   }}>CLOSE</button>
-                         <button onClick={handleSendTestMessage} disabled={sendingTest || !testMessage.recipient || !testMessage.body} style={{
-                    backgroundColor: sendingTest ? '#ccc' : '#143F93',
-                    border: 0,
-                    borderRadius: '4px',
-                    color: '#fff',
-                    cursor: sendingTest ? 'not-allowed' : 'pointer',
-                    fontFamily: 'Helvetica, Arial, sans-serif',
-                    fontSize: '16px',
-                    fontWeight: '500',
-                    height: '40px',
-                    padding: '0 24px'
-                  }}>
+                         <button 
+                          onClick={handleSendTestMessage} 
+                          disabled={sendingTest || !testMessage.recipient || !testMessage.body} 
+                          className="primary-button"
+                          style={{
+                            backgroundColor: sendingTest ? '#e5e7eb' : undefined,
+                            cursor: sendingTest ? 'not-allowed' : undefined
+                          }}
+                        >
                           {sendingTest ? 'Sending...' : 'Send Test Message'}
                         </button>
                       </div>
                     </>}
-
+                  </div>
                 </div>
               </div>}
           </div>
