@@ -508,7 +508,7 @@ const Index = () => {
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 18px;
+          font-size: 22px;
           color: #64748b;
           cursor: pointer;
           transition: all 0.2s ease;
