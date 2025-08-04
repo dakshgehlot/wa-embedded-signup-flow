@@ -1267,7 +1267,7 @@ const Index = () => {
                   }}>Your WhatsApp sender has been successfully registered with Meta and Netcore Cloud.</p>
                       <div style={{
                   textAlign: 'center',
-                  padding: '40px 0'
+                  padding: '20px 0'
                 }}>
                         <div className="success-icon">✓</div>
                       </div>
