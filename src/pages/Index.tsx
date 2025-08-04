@@ -1062,7 +1062,8 @@ const Index = () => {
                   }}>✓</div>
                         <p style={{
                     color: '#666',
-                    fontSize: '16px'
+                    fontSize: '16px',
+                    textAlign: 'left'
                   }}>Your WhatsApp sender has been successfully registered with Meta and Netcore Cloud.</p>
                       </div>
                       <div className="modal-actions" style={{ display: 'flex', justifyContent: 'center', gap: '12px' }}>
