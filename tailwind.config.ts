@@ -57,6 +57,16 @@ export default {
 					foreground: 'hsl(var(--facebook-foreground))',
 					hover: 'hsl(var(--facebook-hover))'
 				},
+				netcore: {
+					orange: 'hsl(var(--netcore-orange))',
+					'orange-light': 'hsl(var(--netcore-orange-light))',
+					blue: 'hsl(var(--netcore-blue))',
+					'blue-light': 'hsl(var(--netcore-blue-light))'
+				},
+				whatsapp: {
+					green: 'hsl(var(--whatsapp-green))',
+					'green-light': 'hsl(var(--whatsapp-green-light))'
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
