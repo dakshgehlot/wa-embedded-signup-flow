@@ -719,7 +719,8 @@ const Index = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            zIndex: 1000
+            zIndex: 1000,
+            padding: '20px'
           }}>
                 <div className="custom-modal-animate" style={{
               background: '#fff',
