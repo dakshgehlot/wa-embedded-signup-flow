@@ -1066,13 +1066,7 @@ const Index = () => {
                     fontSize: '16px'
                   }}>Your WhatsApp sender has been successfully registered with Meta and Netcore Cloud.</p>
                       </div>
-                      <div className="modal-actions" style={{ display: 'flex', justifyContent: 'center', gap: '12px' }}>
-                        <button className="modal-link-btn" onClick={() => {
-                    setShowModal(false);
-                    setModalStep(null);
-                    setIsLoading(false);
-                    setIsSuccess(false);
-                  }}>CLOSE</button>
+                      <div className="modal-actions" style={{ display: 'flex', justifyContent: 'center' }}>
                          <button onClick={() => setModalStep(8)} style={{
                     backgroundColor: '#143F93',
                     border: 0,
@@ -1085,7 +1079,7 @@ const Index = () => {
                     height: '40px',
                     padding: '0 24px'
                   }}>
-                          Send Test Message
+                          Send test message
                         </button>
                       </div>
                     </>}
