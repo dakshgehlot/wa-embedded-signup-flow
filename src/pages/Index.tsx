@@ -1066,7 +1066,7 @@ const Index = () => {
                     fontSize: '16px'
                   }}>Your WhatsApp sender has been successfully registered with Meta and Netcore Cloud.</p>
                       </div>
-                      <div className="modal-actions">
+                      <div className="modal-actions" style={{ display: 'flex', justifyContent: 'center', gap: '12px' }}>
                         <button className="modal-link-btn" onClick={() => {
                     setShowModal(false);
                     setModalStep(null);
