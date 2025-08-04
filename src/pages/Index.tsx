@@ -1066,7 +1066,7 @@ const Index = () => {
                     fontSize: '16px'
                   }}>Your WhatsApp sender has been successfully registered with Meta and Netcore Cloud.</p>
                       </div>
-                      <div className="modal-actions" style={{ display: 'flex', justifyContent: 'center' }}>
+                      <div className="modal-actions" style={{ display: 'flex', justifyContent: 'flex-start' }}>
                          <button onClick={() => setModalStep(8)} style={{
                     backgroundColor: '#143F93',
                     border: 0,
