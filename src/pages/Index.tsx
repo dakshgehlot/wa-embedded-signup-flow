@@ -490,7 +490,7 @@ const Index = () => {
           font-weight: 700;
           margin-bottom: 8px;
           color: #000000;
-          text-align: left;
+          text-align: center;
         }
         .modal-desc {
           color: #444;
@@ -1041,7 +1041,8 @@ const Index = () => {
                   {/* Step 6: Success state */}
                   {modalStep === 6 && <>
                       <div className="modal-title" style={{
-                  color: '#000000'
+                  color: '#000000',
+                  textAlign: 'center'
                 }}>WhatsApp registration completed successfully!</div>
                       <div style={{
                   textAlign: 'center',
@@ -1062,11 +1063,10 @@ const Index = () => {
                   }}>✓</div>
                         <p style={{
                     color: '#666',
-                    fontSize: '16px',
-                    textAlign: 'left'
+                    fontSize: '16px'
                   }}>Your WhatsApp sender has been successfully registered with Meta and Netcore Cloud.</p>
                       </div>
-                      <div className="modal-actions" style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px' }}>
+                      <div className="modal-actions" style={{ display: 'flex', justifyContent: 'center', gap: '12px' }}>
                         <button className="modal-link-btn" onClick={() => {
                     setShowModal(false);
                     setModalStep(null);
@@ -1092,7 +1092,8 @@ const Index = () => {
                   {/* Step 7: Error state */}
                   {modalStep === 7 && <>
                       <div className="modal-title" style={{
-                  color: '#000000'
+                  color: '#000000',
+                  textAlign: 'center'
                 }}>Registration interrupted!</div>
                       <div style={{
                   textAlign: 'center',
