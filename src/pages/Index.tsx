@@ -1044,6 +1044,12 @@ const Index = () => {
                   color: '#000000',
                   textAlign: 'center'
                 }}>WhatsApp registration completed successfully!</div>
+                      <p style={{
+                    color: '#666',
+                    fontSize: '16px',
+                    textAlign: 'center',
+                    marginBottom: '20px'
+                  }}>Your WhatsApp sender has been successfully registered with Meta and Netcore Cloud.</p>
                       <div style={{
                   textAlign: 'center',
                   padding: '40px 0'
@@ -1061,10 +1067,6 @@ const Index = () => {
                     color: 'white',
                     animation: 'bounce 1s ease-in-out'
                   }}>✓</div>
-                        <p style={{
-                    color: '#666',
-                    fontSize: '16px'
-                  }}>Your WhatsApp sender has been successfully registered with Meta and Netcore Cloud.</p>
                       </div>
                       <div className="modal-actions" style={{ display: 'flex', justifyContent: 'flex-start' }}>
                          <button onClick={() => setModalStep(8)} style={{
