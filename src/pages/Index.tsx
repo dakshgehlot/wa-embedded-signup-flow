@@ -1117,7 +1117,7 @@ const Index = () => {
                     fontSize: '16px'
                   }}>The registration process was interrupted. Please try again to complete your WhatsApp sender registration.</p>
                       </div>
-                      <div className="modal-actions">
+                      <div className="modal-actions" style={{ display: 'flex', justifyContent: 'center' }}>
                          <button onClick={handleTryAgain} style={{
                     backgroundColor: '#143F93',
                     border: 0,
@@ -1130,7 +1130,7 @@ const Index = () => {
                     height: '40px',
                     padding: '0 24px'
                   }}>
-                          Try Again
+                          Try <span style={{ fontSize: '12px' }}>a</span>gain
                         </button>
                       </div>
                     </>}
