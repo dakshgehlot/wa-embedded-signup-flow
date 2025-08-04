@@ -490,7 +490,7 @@ const Index = () => {
           font-weight: 700;
           margin-bottom: 8px;
           color: #000000;
-          text-align: center;
+          text-align: left;
         }
         .modal-desc {
           color: #444;
@@ -1041,8 +1041,7 @@ const Index = () => {
                   {/* Step 6: Success state */}
                   {modalStep === 6 && <>
                       <div className="modal-title" style={{
-                  color: '#000000',
-                  textAlign: 'center'
+                  color: '#000000'
                 }}>WhatsApp registration completed successfully!</div>
                       <div style={{
                   textAlign: 'center',
@@ -1092,8 +1091,7 @@ const Index = () => {
                   {/* Step 7: Error state */}
                   {modalStep === 7 && <>
                       <div className="modal-title" style={{
-                  color: '#000000',
-                  textAlign: 'center'
+                  color: '#000000'
                 }}>Registration interrupted!</div>
                       <div style={{
                   textAlign: 'center',
