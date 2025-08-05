@@ -757,7 +757,7 @@ const Index = () => {
                     flexShrink: 0
                   }} />
                         <div className="option-content">
-                          <div className="option-title">Connect a number you have outside of Netcore Cloud</div>
+                          <div className="option-title">Connect a number you already have</div>
                           <div className="option-desc">You will need to delete any existing WhatsApp accounts connected to the number. Verification with SMS or phone call required.</div>
                         </div>
                       </div>
