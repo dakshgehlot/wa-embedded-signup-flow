@@ -821,7 +821,7 @@ const Index = () => {
                     ...c,
                     twofa: e.target.checked
                   }))} />
-                        <label htmlFor="2fa-check">I disabled 2FA on my old provider <a href="https://www.facebook.com/business/help/152651581095145" target="_blank" rel="noopener noreferrer" style={{
+                        <label htmlFor="2fa-check">I disabled 2FA on my old provider <a href="https://developers.facebook.com/docs/whatsapp/cloud-api/phone-numbers#two-step-verification" target="_blank" rel="noopener noreferrer" style={{
                       color: '#ff6d00',
                       textDecoration: 'underline'
                     }}>as required by Meta</a></label>
