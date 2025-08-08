@@ -151,13 +151,13 @@ const Index = () => {
         response_type: 'code',
         override_default_response_type: true,
         extras: {
-          //   features: [
-          //     {
-          //       name: "marketing_messages_lite",
-          //     }
-          //   ],
+            features: [
+              {
+                name: "marketing_messages_lite",
+              }
+            ],
           setup: {},
-          featureType: featureTypeOverride,
+          // featureType: "featureTypeOverride",
           sessionInfoVersion: '3'
         }
       });
@@ -811,7 +811,7 @@ const Index = () => {
                     ...c,
                     doc: e.target.checked
                   }))} />
-                        <label htmlFor="doc-check">I read the <a href="https://developers.facebook.com/docs/whatsapp/migration" target="_blank" rel="noopener noreferrer" style={{
+                        <label htmlFor="doc-check">I read the <a href="https://developers.facebook.com/docs/whatsapp/solution-providers/support/migrating-phone-numbers-among-solution-partners-via-embedded-signup" target="_blank" rel="noopener noreferrer" style={{
                       color: '#ff6d00',
                       textDecoration: 'underline'
                     }}>Meta documentation</a> and know the potential risks of migrating numbers between providers.</label>
@@ -883,10 +883,7 @@ const Index = () => {
                         <span className="migration-warning-icon">⚠️</span>
                         <div>
                           <b>Before you continue</b><br />
-                          If your number was connected to a personal WhatsApp account or WhatsApp Business App, make sure to delete your account before you continue. If you do not do this, your sender could be banned by Meta. <a href="https://www.facebook.com/business/help/152651581095145" target="_blank" rel="noopener noreferrer" style={{
-                      color: '#ff6d00',
-                      textDecoration: 'underline'
-                    }}>Learn how to delete account</a>
+                          If your number was connected to a personal WhatsApp account or WhatsApp Business App, make sure to delete your account before you continue. If you do not do this, your sender could be banned by Meta.
                         </div>
                       </div>
                       <div className="migration-checkbox">
@@ -1116,7 +1113,7 @@ const Index = () => {
                         <p style={{
                     color: '#666',
                     fontSize: '16px'
-                  }}>The registration process was interrupted. Please try again to complete your WhatsApp sender registration.</p>
+                  }}>The registration process was interrupted. Please try again to complete your WhatsApp sender registration. If the issue persists, please contact your onboarding manager.</p>
                       </div>
                       <div className="modal-actions" style={{ display: 'flex', justifyContent: 'center' }}>
                          <button onClick={handleTryAgain} style={{
